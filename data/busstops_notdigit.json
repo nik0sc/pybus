@@ -1,0 +1,1815 @@
+[
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "AYE",
+        "BusStopCode": "AYE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "BKE",
+        "BusStopCode": "BKE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Saf Ferry Ter",
+        "Longitude": 0,
+        "RoadName": "Nicoll Dr",
+        "BusStopCode": "C9500"
+    },
+    {
+        "Latitude": 0,
+        "Description": "CP B",
+        "Longitude": 0,
+        "RoadName": "Stadium Rd",
+        "BusStopCode": "CPARK"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "CTE",
+        "BusStopCode": "CTE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Raffles Blvd",
+        "BusStopCode": "E0200"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Raffles Ave",
+        "BusStopCode": "E0201"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Republic Blvd",
+        "BusStopCode": "E0202"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "High St",
+        "BusStopCode": "E0203"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Coleman St",
+        "BusStopCode": "E0204"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Rochor Rd",
+        "BusStopCode": "E0205"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Esplanade Dr",
+        "BusStopCode": "E0206"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Parliament Pl",
+        "BusStopCode": "E0218"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "St. Andrew's Rd",
+        "BusStopCode": "E0219"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Prince Edward Rd",
+        "BusStopCode": "E0300"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Marina Stn Rd",
+        "BusStopCode": "E0301"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Collyer Quay",
+        "BusStopCode": "E0302"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Cecil St",
+        "BusStopCode": "E0303"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Finalyson Green",
+        "BusStopCode": "E0304"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Finalyson Green",
+        "BusStopCode": "E0305"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Shenton Way",
+        "BusStopCode": "E0321"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Anson Rd",
+        "BusStopCode": "E0322"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Palmer Rd",
+        "BusStopCode": "E0323"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Marina Way",
+        "BusStopCode": "E0330"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Marina St",
+        "BusStopCode": "E0331"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Marina Blvd",
+        "BusStopCode": "E0339"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Marina Link",
+        "BusStopCode": "E0341"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Central Blvd",
+        "BusStopCode": "E0353"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Nth Bridge Rd",
+        "BusStopCode": "E0400"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Stamford Rd",
+        "BusStopCode": "E0401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Prinsep St",
+        "BusStopCode": "E0402"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Armenian St",
+        "BusStopCode": "E0403"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hill St",
+        "BusStopCode": "E0404"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "New Bridge Rd",
+        "BusStopCode": "E0405"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Nth Canal Rd",
+        "BusStopCode": "E0501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sth Canal Rd",
+        "BusStopCode": "E0502"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Pickering St",
+        "BusStopCode": "E0503"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Havelock Rd",
+        "BusStopCode": "E0504"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Eu Tong Sen St",
+        "BusStopCode": "E0505"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Enggor Rd",
+        "BusStopCode": "E0506"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hoe Chiang Rd",
+        "BusStopCode": "E0507"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Cantonment Rd",
+        "BusStopCode": "E0508"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lim Teck Kim Rd",
+        "BusStopCode": "E0509"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Neil Rd",
+        "BusStopCode": "E0510"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Maxwell Rd",
+        "BusStopCode": "E0511"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Keppel Rd",
+        "BusStopCode": "E0564"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Maxwell Rd",
+        "BusStopCode": "E0599"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Selegie Rd",
+        "BusStopCode": "E0700"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Ophir Rd",
+        "BusStopCode": "E0702"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Penang Rd",
+        "BusStopCode": "E0800"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Buyong Rd",
+        "BusStopCode": "E0801"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Prinsep St",
+        "BusStopCode": "E0807"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Orchard Rd",
+        "BusStopCode": "E0900"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Orchard Link",
+        "BusStopCode": "E0901"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Grange Rd",
+        "BusStopCode": "E0902"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Orchard Blvd",
+        "BusStopCode": "E0911"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Delta Rd",
+        "BusStopCode": "E1000"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tanglin Halt Rd",
+        "BusStopCode": "E1100"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Queensway",
+        "BusStopCode": "E1101"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Clementi Rd",
+        "BusStopCode": "E1206"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Paterson Rd",
+        "BusStopCode": "E1300"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Paterson Hill",
+        "BusStopCode": "E1301"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Killiney Rd",
+        "BusStopCode": "E1302"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Martin Rd",
+        "BusStopCode": "E1303"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "River Valley Cl",
+        "BusStopCode": "E1304"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Telok Blangah Rd",
+        "BusStopCode": "E1401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Kg Bahru Rd",
+        "BusStopCode": "E1402"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Seah Im Rd",
+        "BusStopCode": "E1403"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Telok Blangah Rd",
+        "Longitude": 0,
+        "RoadName": "Telok Blangah Rd",
+        "BusStopCode": "E1404"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Keppel Rd",
+        "BusStopCode": "E1411"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Alexandra Rd",
+        "BusStopCode": "E1500"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Pasir Panjang Rd",
+        "BusStopCode": "E1501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "West Coast Highway",
+        "BusStopCode": "E1600"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "C'wealth Ave West",
+        "BusStopCode": "E1700"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "West Coast Ferry Rd",
+        "BusStopCode": "E1701"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Clementi Ave 6",
+        "BusStopCode": "E1702"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Buona Vista Flyover",
+        "BusStopCode": "E1800"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Raffles Blvd",
+        "BusStopCode": "E2000"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Corporation Rd",
+        "BusStopCode": "E2100"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Yung Kuang Rd",
+        "BusStopCode": "E2101"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Boon Lay",
+        "BusStopCode": "E2102"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jurong West Ctrl 2",
+        "BusStopCode": "E2200"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jurong West Ctrl 3",
+        "BusStopCode": "E2201"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jurong East St 11",
+        "BusStopCode": "E2202"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jurong Town Hall Rd",
+        "BusStopCode": "E2203"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Bahar",
+        "BusStopCode": "E2700"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Boon Lay Way",
+        "BusStopCode": "E2801"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Toh Tuck Ave",
+        "BusStopCode": "E2810"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Stevens Rd",
+        "BusStopCode": "E4022"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Whitley Rd",
+        "BusStopCode": "E4023"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Cairnhill Rd",
+        "BusStopCode": "E4024"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Anak Bt",
+        "BusStopCode": "E4200"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Upp Bt Timah Rd",
+        "BusStopCode": "E4300"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok West Ave 8",
+        "BusStopCode": "E4301"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok East Ave 2",
+        "BusStopCode": "E4302"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Remaja",
+        "BusStopCode": "E4303"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Elizabeth Dr",
+        "BusStopCode": "E4304"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hillview Rd",
+        "BusStopCode": "E4305"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok St 32",
+        "BusStopCode": "E4306"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hillview Ave",
+        "BusStopCode": "E4307"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok Rd",
+        "BusStopCode": "E4308"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok West Ave 5",
+        "BusStopCode": "E4309"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Batok West Ave 7",
+        "BusStopCode": "E4364"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Loop",
+        "BusStopCode": "E4400"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 4",
+        "BusStopCode": "E4401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Rd",
+        "BusStopCode": "E4402"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 3",
+        "BusStopCode": "E4403"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 1",
+        "BusStopCode": "E4404"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Dr",
+        "BusStopCode": "E4406"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Fajar Rd",
+        "BusStopCode": "E4407"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bt Panjang Rd",
+        "BusStopCode": "E4408"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Teck Whye Lane",
+        "BusStopCode": "E4409"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Senja Link",
+        "BusStopCode": "E4410"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non-Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Rd",
+        "BusStopCode": "E4413"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Rd",
+        "BusStopCode": "E4418"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Nth 7",
+        "BusStopCode": "E4451"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 5",
+        "BusStopCode": "E4458"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Gr",
+        "BusStopCode": "E4459"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Way",
+        "BusStopCode": "E4460"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 7",
+        "BusStopCode": "E4461"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Senja Way",
+        "BusStopCode": "E4479"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Petir Rd",
+        "BusStopCode": "E4500"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jelebu Rd",
+        "BusStopCode": "E4501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Dairy Farm Rd",
+        "BusStopCode": "E4502"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Pakis",
+        "BusStopCode": "E4504"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Nth 6",
+        "BusStopCode": "E4535"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Ave 2",
+        "BusStopCode": "E4601"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Dr 63",
+        "BusStopCode": "E4602"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Ave 5",
+        "BusStopCode": "E4604"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Ave 12",
+        "BusStopCode": "E4605"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Gambas Ave",
+        "BusStopCode": "E4609"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Causeway",
+        "BusStopCode": "E4610"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Gereja",
+        "BusStopCode": "E4611"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Getark Merah",
+        "BusStopCode": "E4612"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Persiaran Tun Sri Lanang",
+        "BusStopCode": "E4613"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Lingkaran Dalam",
+        "BusStopCode": "E4614"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Tun Abdul Razak",
+        "BusStopCode": "E4615"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Tun Dr Ismail",
+        "BusStopCode": "E4616"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Wong Ah Fook",
+        "BusStopCode": "E4617"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Woodlands Dr 17",
+        "BusStopCode": "E4618"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Tg Puteri",
+        "BusStopCode": "E4619"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Mandai Ave",
+        "BusStopCode": "E4800"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor 1 Toa Payoh",
+        "BusStopCode": "E5200"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor 3 Toa Payoh",
+        "BusStopCode": "E5202"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor 4 Toa Payoh",
+        "BusStopCode": "E5203"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Kim Keat Link",
+        "BusStopCode": "E5204"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Braddell Rd",
+        "BusStopCode": "E5205"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Kim Keat Rd",
+        "BusStopCode": "E5206"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Toa Payoh",
+        "BusStopCode": "E5207"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor 2 Toa Payoh",
+        "BusStopCode": "E5213"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bishan St 11",
+        "BusStopCode": "E5300"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lentor Cres",
+        "BusStopCode": "E5605"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lentor Loop",
+        "BusStopCode": "E5606"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lentor St",
+        "BusStopCode": "E5607"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lentor Ave",
+        "BusStopCode": "E5608"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "SLE",
+        "BusStopCode": "E5609"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Yio Chu Kang Rd",
+        "BusStopCode": "E5610"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sembawang Dr",
+        "BusStopCode": "E5800"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sembawang Ave",
+        "BusStopCode": "E5801"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sembawang Rd",
+        "BusStopCode": "E5802"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Admiralty St",
+        "BusStopCode": "E5803"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Admiralty Lane",
+        "BusStopCode": "E5804"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Champions Way",
+        "BusStopCode": "E5805"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Yishun Ctrl 1",
+        "BusStopCode": "E5900"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Yishun Ctrl",
+        "BusStopCode": "E5901"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Yishun St 31",
+        "BusStopCode": "E5903"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non-Stop",
+        "Longitude": 0,
+        "RoadName": "Yishun Ave 2",
+        "BusStopCode": "E5904"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bendemeer Rd",
+        "BusStopCode": "E6000"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Whampoa Nth",
+        "BusStopCode": "E6001"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "S'goon Rd",
+        "BusStopCode": "E6002"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Whampoa East",
+        "BusStopCode": "E6003"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Jln Toa Payoh",
+        "BusStopCode": "E6008"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Buangkok Dr",
+        "BusStopCode": "E6400"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hougang Ave 3",
+        "BusStopCode": "E6401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Hougang St 61",
+        "BusStopCode": "E6402"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "S'goon Gdn Way",
+        "BusStopCode": "E6600"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "S'goon Nth Ave 2",
+        "BusStopCode": "E6601"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Compassvale St",
+        "BusStopCode": "E6700"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Rivervale Lane",
+        "BusStopCode": "E6701"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Circuit Link",
+        "BusStopCode": "E7000"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Merpati Rd",
+        "BusStopCode": "E7001"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor Bengkok",
+        "BusStopCode": "E7039"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines Ave 12",
+        "BusStopCode": "E7507"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines Ctrl 2",
+        "BusStopCode": "E7508"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines Ctrl 3",
+        "BusStopCode": "E7509"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines Ave 7",
+        "BusStopCode": "E7603"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines Ave 9",
+        "BusStopCode": "E7604"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines St 31",
+        "BusStopCode": "E7605"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Tampines St 12",
+        "BusStopCode": "E7606"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Pasir Ris Dr 8",
+        "BusStopCode": "E7700"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Pasir Ris Dr 10",
+        "BusStopCode": "E7701"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Pasir Ris Dr 3",
+        "BusStopCode": "E7702"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Nicoll Highway",
+        "BusStopCode": "E8000"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sims Ave",
+        "BusStopCode": "E8001"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Geylang Rd",
+        "BusStopCode": "E8002"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Sims Way",
+        "BusStopCode": "E8003"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Stadium Blvd",
+        "BusStopCode": "E8004"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Stadium Dr",
+        "BusStopCode": "E8007"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Lor 1 Geylang",
+        "BusStopCode": "E8008"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bedok Nth Dr",
+        "BusStopCode": "E8400"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bedok Nth Ave 1",
+        "BusStopCode": "E8401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Bedok Nth Rd",
+        "Longitude": 0,
+        "RoadName": "Bedok Nth Rd",
+        "BusStopCode": "E8403"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Bedok Sth Ave 1",
+        "BusStopCode": "E8405"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Upp Changi Rd",
+        "BusStopCode": "E8501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Still Rd Sth",
+        "BusStopCode": "E9200"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Mountbatten Rd",
+        "BusStopCode": "E9209"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Airport Blvd",
+        "BusStopCode": "E9500"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Nicoll Dr",
+        "BusStopCode": "E9501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Loyang Ave",
+        "BusStopCode": "E9801"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Telok Paku Rd",
+        "BusStopCode": "E9901"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "ECP",
+        "BusStopCode": "ECP"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "KJE",
+        "BusStopCode": "KJE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Leisure Pk",
+        "Longitude": 0,
+        "RoadName": "Stadium Blvd",
+        "BusStopCode": "LEIS1"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Leisure Pk",
+        "Longitude": 0,
+        "RoadName": "Stadium Blvd",
+        "BusStopCode": "LEIS9"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "MCE",
+        "BusStopCode": "MCE"
+    },
+    {
+        "Latitude": 1.29231781610359,
+        "Description": "LP 11",
+        "Longitude": 103.84103477951251,
+        "RoadName": "Mohd Sultan Rd",
+        "BusStopCode": "N1309"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Fac Of Arts & Social Sc",
+        "Longitude": 0,
+        "RoadName": "Kent Ridge Dr",
+        "BusStopCode": "N1601"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Fac Of Arts & Social Sc",
+        "Longitude": 0,
+        "RoadName": "Kent Ridge Dr",
+        "BusStopCode": "N1609"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Bef Law Link",
+        "Longitude": 0,
+        "RoadName": "Kent Ridge Dr",
+        "BusStopCode": "N1619"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Temasek Hall",
+        "Longitude": 0,
+        "RoadName": "Kent Ridge Dr",
+        "BusStopCode": "N1621"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Eusoff Hall",
+        "Longitude": 0,
+        "RoadName": "Kent Ridge Dr",
+        "BusStopCode": "N1631"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Kent Ridge Hall",
+        "Longitude": 0,
+        "RoadName": "Lower Kent Ridge Rd",
+        "BusStopCode": "N1801"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Kent Ridge Hall",
+        "Longitude": 0,
+        "RoadName": "Lower Kent Ridge Rd",
+        "BusStopCode": "N1809"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Sheares Hall",
+        "Longitude": 0,
+        "RoadName": "Lower Kent Ridge Rd",
+        "BusStopCode": "N1811"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Sheares Hall",
+        "Longitude": 0,
+        "RoadName": "Lower Kent Ridge Rd",
+        "BusStopCode": "N1819"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Hall Of Residence 5",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2709"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Innovation Ctr",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2719"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Sch Of Comm Studies",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2729"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Sch Of Cse",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2739"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Blk N2",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2749"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Lib 1",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2759"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Hall Of Residence 8",
+        "Longitude": 0,
+        "RoadName": "Nanyang Dr",
+        "BusStopCode": "N2769"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Hall Of Residence 3",
+        "Longitude": 0,
+        "RoadName": "Nanyang Link",
+        "BusStopCode": "N2779"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Hall Of Residence 7",
+        "Longitude": 0,
+        "RoadName": "Nanyang Link",
+        "BusStopCode": "N2789"
+    },
+    {
+        "Latitude": 1.33780381373794,
+        "Description": "Opp Boon Lay Stn",
+        "Longitude": 103.70689097976616,
+        "RoadName": "Boon Lay Way",
+        "BusStopCode": "N2801"
+    },
+    {
+        "Latitude": 1.37835675026421,
+        "Description": "Blk 297D",
+        "Longitude": 103.74308505803612,
+        "RoadName": "Choa Chu Kang Ave 2",
+        "BusStopCode": "N4401"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Non Stop",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Ave 1",
+        "BusStopCode": "N4404"
+    },
+    {
+        "Latitude": 1.3775824297061201,
+        "Description": "Blk 296",
+        "Longitude": 103.74064137870373,
+        "RoadName": "Choa Chu Kang Ave 2",
+        "BusStopCode": "N4411"
+    },
+    {
+        "Latitude": 1.3973512921939699,
+        "Description": "Blk 604A CP",
+        "Longitude": 103.7454191491989,
+        "RoadName": "Choa Chu Kang St 62",
+        "BusStopCode": "N4421"
+    },
+    {
+        "Latitude": 1.39884898673915,
+        "Description": "Blk 621 (LP 13)",
+        "Longitude": 103.74703991205672,
+        "RoadName": "Choa Chu Kang St 62",
+        "BusStopCode": "N4431"
+    },
+    {
+        "Latitude": 1.3944652780145601,
+        "Description": "Opp Kranji Pr Sch (LP 87)",
+        "Longitude": 103.74643611099116,
+        "RoadName": "Choa Chu Kang Dr",
+        "BusStopCode": "N4501"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Blk 678A (LP 37)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Nth 7",
+        "BusStopCode": "N4511"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Blk 613 (LP 38)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Nth 7",
+        "BusStopCode": "N4519"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Aft Choa Chu Kang Nth 6 (LP 167)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Way",
+        "BusStopCode": "N4521"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Aft Blk 605 (LP 170)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Way",
+        "BusStopCode": "N4529"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Blk 548 (LP 143)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Way",
+        "BusStopCode": "N4531"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Blk 552 (LP 150)",
+        "Longitude": 0,
+        "RoadName": "Choa Chu Kang Way",
+        "BusStopCode": "N4539"
+    },
+    {
+        "Latitude": 1.4006628369506899,
+        "Description": "Blk 661",
+        "Longitude": 103.75085372559576,
+        "RoadName": "Choa Chu Kang Cres",
+        "BusStopCode": "N4541"
+    },
+    {
+        "Latitude": 1.4027242401348401,
+        "Description": "Blk 666",
+        "Longitude": 103.75001872985764,
+        "RoadName": "Choa Chu Kang Cres",
+        "BusStopCode": "N4559"
+    },
+    {
+        "Latitude": 1.4031383709374099,
+        "Description": "Blk 669",
+        "Longitude": 103.74848963493798,
+        "RoadName": "Choa Chu Kang Cres",
+        "BusStopCode": "N4569"
+    },
+    {
+        "Latitude": 1.4015166058044599,
+        "Description": "Blk 675",
+        "Longitude": 103.74583090707071,
+        "RoadName": "Choa Chu Kang Cres",
+        "BusStopCode": "N4579"
+    },
+    {
+        "Latitude": 1.4008236184074001,
+        "Description": "Blk 673A",
+        "Longitude": 103.74742115464424,
+        "RoadName": "Choa Chu Kang Nth 7",
+        "BusStopCode": "N4591"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Blk 353",
+        "Longitude": 0,
+        "RoadName": "Admiralty Dr",
+        "BusStopCode": "N5801"
+    },
+    {
+        "Latitude": 1.3910420487699,
+        "Description": "Blk 319A",
+        "Longitude": 103.88974726496834,
+        "RoadName": "Anchorvale Link",
+        "BusStopCode": "N6709"
+    },
+    {
+        "Latitude": 0,
+        "Description": "S'pore Flyer",
+        "Longitude": 0,
+        "RoadName": "Raffles Ave",
+        "BusStopCode": "P2051"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "PIE",
+        "BusStopCode": "PIE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "SLE",
+        "BusStopCode": "SLE"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Opp Kallang Tennis Ctr",
+        "Longitude": 0,
+        "RoadName": "Stadium Blvd",
+        "BusStopCode": "TENN9"
+    },
+    {
+        "Latitude": 0,
+        "Description": "Express",
+        "Longitude": 0,
+        "RoadName": "TPE",
+        "BusStopCode": "TPE"
+    }
+]

@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/python
+# ^^^ special shebang line for termux
+
+import pybus
+import json
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/find_bus/<service>/<route_index>/<stop_id>")
+def find_bus(service, route_index, stop_id):
+    return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
+
+@app.route("/route_ends/<service>/<route_index>")
+def route_ends(service, route_index):
+    return json.dumps(pybus.route_ends(service, route_index))
+
+@app.route("/services")
+def get_services():
+    return json.dumps(list(pybus.data_routes.keys()))
+
+@app.route("/routes/<service>")
+def get_routes(service):
+    routes = {}
+    for k in pybus.data_routes.get(service, {}):
+        routes[k] = pybus.route_ends(service, k)
+    return json.dumps(routes)
+
+# statics
+@app.route("/<path:path>")
+def static_file(path):
+    return app.send_static_file(path)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+

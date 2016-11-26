@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>pbapp</title>
+		<meta name="viewport" content="initial-scale=1.0"/>
+		<meta charset="utf-8"/>
+		<style>
+			#map_canvas
+			{
+				height: 100%;
+			}
+			html, body
+			{
+				height: 100%;
+				margin: 0;
+				padding: 0;
+	  		}
+
+		</style>
+		<!-- devt version -->
+		<script src="jquery-3.1.1.js"></script>
+		<script>
+		// execute when page ready
+		$(function(){
+			// update services
+			$.getJSON("services", function(data){
+			});
+			
+			$("#list_service").change(function(){
+			});
+
+			//
+		});
+		</script>
+	</head>
+	<body>
+		<div>service:</div>
+		<div id="container_service"><select id="list_service">
+			<option>...</option>
+		</select></div> 
+
+	</body>
+</html>
