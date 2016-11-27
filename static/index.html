@@ -24,9 +24,17 @@
 		$(function(){
 			// update services
 			$.getJSON("services", function(data){
+				$.each(data, function(i, v){
+					$("#list_service")
+						.append($("<option></option>")
+							.attr("value", v)
+							.text(v));
+				});
 			});
 			
 			$("#list_service").change(function(){
+				// update routes accordingly
+				// $("#list_service")
 			});
 
 			//
@@ -36,7 +44,6 @@
 	<body>
 		<div>service:</div>
 		<div id="container_service"><select id="list_service">
-			<option>...</option>
 		</select></div> 
 
 	</body>
