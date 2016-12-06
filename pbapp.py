@@ -25,6 +25,14 @@ def get_routes(service):
         routes[k] = pybus.route_ends(service, k)
     return json.dumps(routes)
 
+@app.route("/stops/<service>/<route>")
+def get_stops(service, route):
+    stop_nos = [x["BusStopCode"] for x in pybus.data_routes.get(service, {}).get(route, {})]
+    # stop_descs = [pybus.data_stops.get(x, {}).get("Description", "") for x in stop_nos]
+    stops = [pybus.data_stops.get(x, {}) for x in stop_nos]
+    return json.dumps(stops)
+    
+
 # statics
 @app.route("/<path:path>")
 def static_file(path):

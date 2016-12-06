@@ -20,24 +20,79 @@
 		<!-- devt version -->
 		<script src="jquery-3.1.1.js"></script>
 		<script>
+        function update_options(element, entries, values){
+            //if (typeof values == "undefined"){
+            //    values = entries;
+            //}
+            // remove child nodes (all option elements)
+            $(element).empty();
+            // then update
+            // $.each(entries, function(i,v){ (is there a jQuery.zip()?)
+            for (var i = 0; i < entries.length; i++){
+                $(element).append($("<option></option>")
+                    .attr("value", values[i])
+                    .text(entries[i]));
+            } // );
+            return;
+        };
+        alert("Inline script");
+
 		// execute when page ready
 		$(function(){
-			// update services
-			$.getJSON("services", function(data){
-				$.each(data, function(i, v){
-					$("#list_service")
-						.append($("<option></option>")
-							.attr("value", v)
-							.text(v));
-				});
-			});
-			
+            alert("$ start");
+            // event handlers for <select>s	
 			$("#list_service").change(function(){
 				// update routes accordingly
-				// $("#list_service")
+				var svc = $(this).val();
+                $.getJSON("/routes/" + svc, function(data){
+                    var entries = [];
+                    var values = [];
+                    // construct the strings to insert in #list_route
+                    $.each(data, function(i, v){
+                        entries.push(i + ": " + v.first_stop.Description + " to " + v.last_stop.Description);
+                        values.push(i);
+                    }); 
+                    update_options("#list_route", entries, values);
+                });
+                // force update of stops
+                $("#list_route").change();
 			});
 
-			//
+			$("#list_route").change(function(){
+				// update routes accordingly
+				var svc = $("#list_service").val();
+                var route = $(this).val();
+                $.getJSON("/stops/" + svc + "/" + route, function(data){
+                    var entries = [];
+                    var values = [];
+                    // construct the strings to insert in #list_stop
+                    $.each(data, function(i, v){
+                        entries.push(v.BusStopCode + ": " + v.Description);
+                        values.push(v.BusStopCode);
+                    });
+                   update_options("#list_stop", entries, values);
+                });
+			});
+
+            $("#btn_find").click(function(){
+                var url = "/find_bus/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
+                $("#find_url").empty().append(url);
+                // make the request
+                $.getJSON(url, function(data){
+                    // attach it to the page
+                    var text = "Your bus is " + data.stop_distance + " stops away. It's now at " + data.stop ".";
+                    $("#find_result").empty().append(text);
+                });
+            });
+
+			// update services
+			$.getJSON("/services", function(data){
+				update_options("#list_service", data);
+                // force update of routes etc
+                $("#list_service").change();
+			});
+            alert("$ end");
+
 		});
 		</script>
 	</head>
@@ -46,5 +101,12 @@
 		<div id="container_service"><select id="list_service">
 		</select></div> 
 
+        <div>route:</div>
+        <div id="container_route"><select id="list_route"></select></div>
+
+        <div>stop:</div>
+        <div id="container_stop"><select id="list_stop"></select></div>
+
+        <div id="container_find"><button id="btn_find" type="button">Find bus</button></div><div id="find_url">#find_url</div><div id="find_result">#find_result</div>
 	</body>
 </html>

@@ -140,7 +140,11 @@ def find_next_bus(rt, stop_id):
     while stop_index > 0:
         # if (rt["data"][stop_index]["timings"][0] - rt["request_time"]).total_seconds() < distance:
         if rt["data"][stop_index]["timings"][0] < distance:
-            return {"stop": rt["data"][stop_index]["stop"], "stop_index": stop_index, "stop_distance": stop_distance(rt["service"], rt["route_index"], rt["data"][stop_index]["stop"], stop_id)}
+            return {
+                "stop": rt["data"][stop_index]["stop"],
+                "stop_index": stop_index,
+                "stop_distance": stop_distance(rt["service"], rt["route_index"], rt["data"][stop_index]["stop"], stop_id)
+            }
         else:
             stop_index -= 1
     return None
