@@ -1,0 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+export FLASK_APP=pbapp.py
+export FLASK_DEBUG=1
+flask run

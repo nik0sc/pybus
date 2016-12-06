@@ -1,0 +1,186 @@
+{
+  "service": "238",
+  "route_index": "1",
+  "data": [
+    {
+      "timings": [
+        -129,
+        -23,
+        156
+      ],
+      "desc": "Toa Payoh Int",
+      "stop": "52009"
+    },
+    {
+      "timings": [
+        -36,
+        137,
+        174
+      ],
+      "desc": "Opp Toa Payoh Swim Cplx",
+      "stop": "52509"
+    },
+    {
+      "timings": [
+        -87,
+        31,
+        137
+      ],
+      "desc": "Opp Toa Payoh Stadium",
+      "stop": "52329"
+    },
+    {
+      "timings": [
+        -21,
+        97,
+        137
+      ],
+      "desc": "Blk 32",
+      "stop": "52339"
+    },
+    {
+      "timings": [
+        59,
+        176,
+        178
+      ],
+      "desc": "Blk 23",
+      "stop": "52311"
+    },
+    {
+      "timings": [
+        188,
+        297,
+        307
+      ],
+      "desc": "Opp Toa Payoh Polyclinic",
+      "stop": "52489"
+    },
+    {
+      "timings": [
+        -120,
+        254,
+        355
+      ],
+      "desc": "Blk 231",
+      "stop": "52399"
+    },
+    {
+      "timings": [
+        -48,
+        326,
+        425
+      ],
+      "desc": "Blk 227",
+      "stop": "52389"
+    },
+    {
+      "timings": [
+        17,
+        0,
+        0
+      ],
+      "desc": "Bef Blk 221",
+      "stop": "52529"
+    },
+    {
+      "timings": [
+        -7,
+        0,
+        0
+      ],
+      "desc": "Blk 219",
+      "stop": "52059"
+    },
+    {
+      "timings": [
+        65,
+        0,
+        0
+      ],
+      "desc": "Blk 210 Mkt/FC",
+      "stop": "52539"
+    },
+    {
+      "timings": [
+        122,
+        0,
+        0
+      ],
+      "desc": "First Toa Payoh Pr Sch",
+      "stop": "52371"
+    },
+    {
+      "timings": [
+        79,
+        0,
+        0
+      ],
+      "desc": "Braddell Tech Bldg",
+      "stop": "52381"
+    },
+    {
+      "timings": [
+        148,
+        0,
+        0
+      ],
+      "desc": "Opp Blk 231",
+      "stop": "52391"
+    },
+    {
+      "timings": [
+        238,
+        502,
+        871
+      ],
+      "desc": "Toa Payoh Polyclinic",
+      "stop": "52481"
+    },
+    {
+      "timings": [
+        32,
+        388,
+        652
+      ],
+      "desc": "Blk 25",
+      "stop": "52319"
+    },
+    {
+      "timings": [
+        128,
+        484,
+        748
+      ],
+      "desc": "Blk 27",
+      "stop": "52331"
+    },
+    {
+      "timings": [
+        250,
+        606,
+        870
+      ],
+      "desc": "Toa Payoh Stadium",
+      "stop": "52321"
+    },
+    {
+      "timings": [
+        306,
+        662,
+        926
+      ],
+      "desc": "Toa Payoh Swim Cplx",
+      "stop": "52501"
+    },
+    {
+      "timings": [
+        -23,
+        156,
+        336
+      ],
+      "desc": "Toa Payoh Int",
+      "stop": "52009"
+    }
+  ]
+}
