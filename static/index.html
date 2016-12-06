@@ -80,14 +80,14 @@
                 // make the request
                 $.getJSON(url, function(data){
                     // attach it to the page
-                    var text = "Your bus is " + data.stop_distance + " stops away. It's now at " + data.stop ".";
+                    var text = "Your bus is " + data.stop_distance + " stops away. It's now at " + data.stop + ".";
                     $("#find_result").empty().append(text);
                 });
             });
 
 			// update services
 			$.getJSON("/services", function(data){
-				update_options("#list_service", data);
+				update_options("#list_service", data, data);
                 // force update of routes etc
                 $("#list_service").change();
 			});
