@@ -82,6 +82,9 @@
                     // attach it to the page
                     var text = "Your bus is " + data.stop_distance + " stops away. It's now at " + data.stop + ".";
                     $("#find_result").empty().append(text);
+                })
+                .fail(function(){
+                    $("#find_result").empty().append("find_bus failed, see server console");
                 });
             });
 
