@@ -1,0 +1,4 @@
+{
+    "AccountKey": "DON'T PASTE YOUR API KEY HERE! Put it in $PYBUS_ACCOUNTKEY instead",
+    "accept": "application/json"
+}

@@ -5,6 +5,7 @@ import sys
 import json
 import lxml.html
 import re
+import os
 from datetime import datetime
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
@@ -13,6 +14,10 @@ from pprint import pprint
 # API authorisation details (see LTA DataMall website)
 with open("data/hdrs.json", "r") as f:
     hdrs = json.load(f)
+
+hdrs["AccountKey"] = os.getenv("PYBUS_ACCOUNTKEY")
+if hdrs['AccountKey'] == None:
+    raise ValueError('Couldn\'t find $PYBUS_ACCOUNTKEY. Did you export it?')
 
 # read in cached routes and stops
 with open("data/busroutes.json", "r") as f:
