@@ -154,6 +154,33 @@ def find_next_bus(rt, stop_id):
             stop_index -= 1
     return None
 
+def find_next_bus_efficient(service, route_index, stop_id):
+    # directly corresponds to /find_bus/<service>/...
+    # first, get the route...
+    route = data_routes.get(str(service), {}).get(str(route_index), {})
+    # search backwards from the given stop
+    route.reverse()
+
+    stops = [stop["BusStopCode"] for stop in route]
+    try:
+        stop_first_index = stops.index(stop_id)
+    except ValueError:
+        raise ValueError("Stop not in route: service={0} route_index={1} stop_id={2}".format(service, route_index, stop_id))
+
+    # truncate working data
+    route = route[stop_first_index:]
+    stops = stops[stop_first_index:]
+    descs = [data_stops[str(stop)]["Description"] for stop in stops]
+    
+    rt = []
+    for stop_timing in get_busroute_timing_iter(service, stops):
+        rt.append(stop_timing)
+        # TODO: either change the time from absolute to relative seconds here or in get_busroute_timing_iter
+         
+    # TODO: then if the converted time is less than threshold OR it suddenly jumps backward, note it as the location of the next bus
+    rt.update(service=str(ServiceNo), route_index=str(RouteNo))
+
+
 def route_ends(service, route_index):
     '''Get details about the two ends of the given route.'''
     route = data_routes.get(str(service), {}).get(str(route_index), {})
