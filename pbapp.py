@@ -8,7 +8,9 @@ app = Flask(__name__)
 
 @app.route("/find_bus/<service>/<route_index>/<stop_id>")
 def find_bus(service, route_index, stop_id):
-    return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
+    # return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
+    # WARNING! The structure of the returned object has changed!
+    return json.dumps(pybus.find_next_bus_efficient(service, route_index, stop_id)
 
 @app.route("/route_ends/<service>/<route_index>")
 def route_ends(service, route_index):

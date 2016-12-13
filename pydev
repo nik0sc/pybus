@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
-if [ $VIRTUAL_ENV != "/data/data/com.termux/files/home/pybus" ]; then
-       source /data/data/com.termux/files/home/pybus/bin/activate
-fi;
-
-python -i -c "from pybus import *; from pprint import pprint; dir();"
-
