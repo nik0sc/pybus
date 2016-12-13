@@ -3,6 +3,7 @@
 
 import pybus
 import json
+from natsort import natsorted
 from flask import Flask
 app = Flask(__name__)
 
@@ -18,7 +19,7 @@ def route_ends(service, route_index):
 
 @app.route("/services")
 def get_services():
-    return json.dumps(list(pybus.data_routes.keys()))
+    return json.dumps(list(natsorted(pybus.data_routes.keys())))
 
 @app.route("/routes/<service>")
 def get_routes(service):
