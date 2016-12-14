@@ -50,6 +50,10 @@ def check_busroutes(x):
 						break
 	return ok
 
+def rt2dbgsrc(rt):
+    '''Convert result of get_busroute_timing into something suitable for the debug_source arg of find_next_bus_efficient.'''
+    pass
+
 def main():
 	usage = "usage: {0} -f path/to/outfile".format(sys.argv[0])
 	if len(sys.argv) == 1:

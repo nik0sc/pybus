@@ -102,6 +102,12 @@ def get_busroute_timing_iter(bus, stops):
     try:
         for stop in stops:
             resp = get_bus_arr(stop, bus)
+            if not resp["Services"]:
+                yield {
+                    "stop": stop,
+                    "timings": [],
+                }
+
             service = resp["Services"][0]
             timings = [
                 service["NextBus"]["EstimatedArrival"],
@@ -171,7 +177,9 @@ def find_next_bus(rt, stop_id):
             stop_index -= 1
     return None
 
-def find_next_bus_efficient(service, route_index, stop_id):
+def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
+    '''Find the location of the next bus approaching stop_id. debug_source, if provided, is an rt dict containing timings to use instead of querying LTADM.'''
+# TODO implement hook for debug_source
     # directly corresponds to /find_bus/<service>/...
     # first, get the route...
     route = data_routes.get(str(service), {}).get(str(route_index), {})
@@ -193,8 +201,11 @@ def find_next_bus_efficient(service, route_index, stop_id):
     rt = []
     found = None
     threshold = 60
-    for stop_timing in get_busroute_timing_iter(service, stops):
+    source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stops)
+    for stop_timing in source:
         rt.append(stop_timing)
+        if not stop_timing["timings"]:
+            raise RuntimeError("No timings available")
         if stop_timing["timings"][0] < threshold:
             found = rt[-1]["stop"]
             break
@@ -212,7 +223,7 @@ def find_next_bus_efficient(service, route_index, stop_id):
         # "stop_index": rt[-2][,
         # badly named variables!
         "stop_distance": stop_distance(service, route_index, stop_id, found)
-    }
+    }, rt
          
 
 def route_ends(service, route_index):
