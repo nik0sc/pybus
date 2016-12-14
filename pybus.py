@@ -204,7 +204,7 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
     source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stops)
     for stop_timing in source:
         rt.append(stop_timing)
-        if not stop_timing["timings"]:
+        if not stop_timing["timings"][0]:
             raise RuntimeError("No timings available")
         if stop_timing["timings"][0] < threshold:
             found = rt[-1]["stop"]
