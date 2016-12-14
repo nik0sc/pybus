@@ -15,6 +15,15 @@
 				margin: 0;
 				padding: 0;
 	  		}
+	  		#inputs
+	  		{
+	  		    position: fixed;
+	  		    z-index: 10;
+	  		    display: inline-block;
+	  		    width: 70%;
+	  		    bottom: 0;
+	  		    
+	  		}
 
 		</style>
 		<!-- devt version -->
@@ -97,16 +106,24 @@
 		</script>
 	</head>
 	<body>
-		<div>service:</div>
-		<div id="container_service"><select id="list_service">
-		</select></div> 
+	    <div id="about" class="dlg">
+	        <h1>Bus Finder</h1>
+	        <h2>Find the next bus that will approach your stop. 1 stop? Sit tight. 5 stops? Lim kopi. 10 stops? Take an Uber.</h2>
+	        <p>All data comes from <a href="https://www.mytransport.sg/content/mytransport/home/dataMall.html">LTA's DataMall service</a>. If the app can't find the next bus, it's possible that the data from LTA DataMall is bad.</p>
+	        <p><a href="https://github.com/nik0sc/pybus">pybus</a> {{ commit_hash }} ({{ heroku_release_version }})</p> 
+	    </div><!--  id="about" -->
+	
+	    <div id="inputs">
+		    <div>service:</div>
+		    <div id="container_service"><select id="list_service"></select></div> 
 
-        <div>route:</div>
-        <div id="container_route"><select id="list_route"></select></div>
+            <div>route:</div>
+            <div id="container_route"><select id="list_route"></select></div>
 
-        <div>stop:</div>
-        <div id="container_stop"><select id="list_stop"></select></div>
+            <div>stop:</div>
+            <div id="container_stop"><select id="list_stop"></select></div>
 
-        <div id="container_find"><button id="btn_find" type="button">Find bus</button></div><div id="find_url">#find_url</div><div id="find_result">#find_result</div>
+            <div id="container_find"><button id="btn_find" type="button">Find bus</button></div><div id="find_url">#find_url</div><div id="find_result">#find_result</div>
+        </div><!-- id="inputs" -->
 	</body>
 </html>

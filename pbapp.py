@@ -3,9 +3,16 @@
 
 import pybus
 import json
+import os
 from natsort import natsorted
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
+
+# some globals
+with open("commithash", "r") as f:
+    commit_hash = f.read()
+
+heroku_release_version = os.getenv("HEROKU_RELEASE_VERSION")
 
 @app.route("/find_bus/<service>/<route_index>/<stop_id>")
 def find_bus(service, route_index, stop_id):
@@ -35,6 +42,10 @@ def get_stops(service, route):
     stops = [pybus.data_stops.get(x, {}) for x in stop_nos]
     return json.dumps(stops)
     
+@app.route("/")
+@app.route("/index.html")
+def index():
+    return render_template("index.html", commit_hash=commit_hash, heroku_release_version=heroku_release_version)
 
 # statics
 @app.route("/<path:path>")
