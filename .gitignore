@@ -94,3 +94,6 @@ pip-selfcheck.json
 # Startup script (probably containing secret key)
 runapp
 pydev
+
+# version info for app
+commithash
