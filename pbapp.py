@@ -3,12 +3,15 @@
 
 import pybus
 import json
+from natsort import natsorted
 from flask import Flask
 app = Flask(__name__)
 
 @app.route("/find_bus/<service>/<route_index>/<stop_id>")
 def find_bus(service, route_index, stop_id):
-    return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
+    # return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
+    # WARNING! The structure of the returned object has changed!
+    return json.dumps(pybus.find_next_bus_efficient(service, route_index, stop_id)[0])
 
 @app.route("/route_ends/<service>/<route_index>")
 def route_ends(service, route_index):
@@ -16,7 +19,7 @@ def route_ends(service, route_index):
 
 @app.route("/services")
 def get_services():
-    return json.dumps(list(pybus.data_routes.keys()))
+    return json.dumps(list(natsorted(pybus.data_routes.keys())))
 
 @app.route("/routes/<service>")
 def get_routes(service):

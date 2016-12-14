@@ -3,7 +3,7 @@
 
 import sys
 import json
-import lxml.html
+# import lxml.html
 import re
 import os
 from datetime import datetime
@@ -28,13 +28,55 @@ with open("data/busstops.json", "r") as f:
 
 print("Loaded cached data")
 
+def get_ltadm_obj(url, timestamp=True):
+    '''Fetch JSON data from an LTA DataMall endpoint and decode it, inserting a timestamp before eeturning the object. This is the lowest-level function that gets LTADM data.'''
+    # look out for HTTPError or json.decoder.JSONDecodeError
+    rq = Request(url, headers = hdrs)
+    
+    resp = urlopen(rq).read().decode("utf-8")
+    x = json.loads(resp)
+    if timestamp == True:
+        x["request_time"] = datetime.utcnow()
+    
+    return x
+
+def get_ltadm_obj_skip(url, skip=0, timestamp=True):
+    '''Fetch JSON data from an LTA DataMall endpoint and decode it. skip is the parameter for $skip (see the LTA DataMall documentation for more info)'''
+    if len(url.split("?")) > 1:
+        # there is at least one ? token in the url
+        fstr = "{0}&$skip={1}"
+    else:
+        fstr = "{0}?$skip={1}"
+    url = fstr.format(url, skip)
+    return get_ltadm_obj(url, timestamp) 
+
+def get_all_ltadm_obj(url):
+    '''Fetch all LTA DataMall data from an endpoint that implements the $skip parameter.'''
+    # over here time_start and _end are strings, but get_ltadm_obj()["request_time"] is a datetime object, because this function's output is likely to be written to a file. In contrast, get_ltadm_obj()'s output and functions that use it, will store the result in memory only, or will not write the request_time member to a file or string.
+    time_start = str(datetime.now())
+    skip = 0
+    # req_len is the max number of data items per request
+    req_len = 50
+    x = []
+    while True:
+        y = get_ltadm_obj_skip(url, skip, timestamp=False)["value"]
+        x += y
+        if len(y) < req_len:
+            break
+        skip += 50
+    time_end = str(datetime.now())
+    return {"data": x, "time_start": time_start, "time_end": time_end} 
+
 def get_bus_arr(BusStopID, ServiceNo):
+    '''Get an LTA DataMall bus arrival object. This is a specialised version of get_ltadm_obj().'''
     url = "http://datamall2.mytransport.sg/ltaodataservice/BusArrival?BusStopID={0}&ServiceNo={1}".format(BusStopID, ServiceNo)
     #print(url)
     return get_ltadm_obj(url)
 
 def write_bus_arr(BusStopID, ServiceNo):
+    '''Utility and testing function: write out an LTA DataMall bus arrival object to a file'''
     x = get_bus_arr(BusStopID, ServiceNo)
+    x["request_time"] = str(x["request_time"])
     fname = "busarr-{0}-{1}.json".format(BusStopID, ServiceNo)
     
     with open(fname, "w") as f:
@@ -43,48 +85,10 @@ def write_bus_arr(BusStopID, ServiceNo):
     print("Wrote response to " + fname)
     return
 
-def get_ltadm_obj(url):
-    '''Fetch JSON data from an LTA DataMall endpoint and decode it, inserting a timestamp before returning the object'''
-    # look out for HTTPError or json.decoder.JSONDecodeError
-    rq = Request(url, headers = hdrs)
-    
-    resp = urlopen(rq).read().decode("utf-8")
-    x = json.loads(resp)
-    # add a timestamp
-    x["request_time"] = str(datetime.utcnow())
-    
-    return x
-
-def get_ltadm_obj_skip(url, skip = 0):
-    '''Fetch JSON data from an LTA DataMall endpoint and decode it. skip is the parameter for $skip (see the LTA DataMall documentation for more info)'''
-    if len(url.split("?")) > 1:
-        # there is at least one ? token in the url
-        fstr = "{0}&$skip={1}"
-    else:
-        fstr = "{0}?$skip={1}"
-    url = fstr.format(url, skip)
-    return get_ltadm_obj(url) 
-
-def get_all_ltadm_obj(url):
-    '''Fetch all LTA DataMall data from an endpoint that implements the $skip parameter.'''
-    time_start = str(datetime.now())
-    skip = 0
-    # req_len is the max number of data items per request
-    req_len = 50
-    x = []
-    while True:
-        y = get_ltadm_obj_skip(url, skip)["value"]
-        x += y
-        if len(y) < req_len:
-            break
-        skip += 50
-    time_end = str(datetime.now())
-    return {"data": x, "time_start": time_start, "time_end": time_end} 
-
 def utc2dt(utcstr):
     '''Convert UTC time to a datetime object'''
     if utcstr == "":
-        return
+        return None
     if utcstr[-6:] != "+00:00":
         raise TypeError("Bad timezone in " + utcstr)
     utcstr = utcstr[:-6]
@@ -92,34 +96,53 @@ def utc2dt(utcstr):
     return dt
 
 def get_busroute_timing_iter(bus, stops):
-# this uses yield instead of making every request at once to let the user control the rate of requests. LTA DataMall doesn't have a published API limit but that might change in the future
+    '''Return an iterator that fetches the bus arrival timing in seconds for each stop in stops.'''
+    # this uses yield instead of making every request at once to let the user control the rate of requests. LTA DataMall doesn't have a published API limit but that might change in the future
+    # ... also, heroku chokes if you make this many requests in a row
     try:
         for stop in stops:
             resp = get_bus_arr(stop, bus)
+            if not resp["Services"]:
+                yield {
+                    "stop": stop,
+                    "timings": [],
+                }
+
             service = resp["Services"][0]
-            yield [service["NextBus"]["EstimatedArrival"], service["SubsequentBus"]["EstimatedArrival"], service["SubsequentBus3"]["EstimatedArrival"]]
+            timings = [
+                service["NextBus"]["EstimatedArrival"],
+                service["SubsequentBus"]["EstimatedArrival"],
+                service["SubsequentBus3"]["EstimatedArrival"]
+            ]
+            # SyntaxError if you switch the for and if/else clauses around
+            timings_secs = [int((utc2dt(x) - resp["request_time"]).total_seconds()) if x != "" else None for x in timings]
+            yield {
+                "timings": timings_secs,
+                "stop": stop
+            }
+
     except IndexError as e:
         print("IndexError in stop={0} bus={1}".format(stop, bus))
         raise
 
 def get_busroute_timing(bus, stops, descs):
     keys = ["stop", "desc", "timings"]
-    timings = [t for t in get_busroute_timing_iter(bus, stops)]
-    return {"data": [dict(zip(keys, x)) for x in zip(stops, descs, timings)], "request_time": datetime.utcnow()}
+    timings = [t["timings"] for t in get_busroute_timing_iter(bus, stops)]
+    return {
+        # how did I even write this??? probably the hardest bit of code in here
+        "data": [dict(zip(keys, x)) for x in zip(stops, descs, timings)],
+        "request_time": datetime.utcnow()
+    }
 
-def get_rt_cached(ServiceNo, RouteNo):
+def get_rt_cached(service, route_index):
     '''Get bus arrival timings (in seconds from request time) using the cached routes'''
-    # route = routes["ServiceNo"]["RouteNo"]
-    route = data_routes.get(str(ServiceNo), {}).get(str(RouteNo), {})
+    # TODO: verify that this still works as normal
+    route = data_routes.get(str(service), {}).get(str(route_index), {})
     stops = [stop["BusStopCode"] for stop in route]
     descs = [data_stops[str(stop)]["Description"] for stop in stops]
-    rt = get_busroute_timing(ServiceNo, stops, descs)
-    rt.update(service=str(ServiceNo), route_index=str(RouteNo))
-
-    # use a list comp for this?
-    for stop_i, stop in enumerate(rt["data"]): 
-        for timing_i, timing in enumerate(rt["data"][stop_i]["timings"]):
-            rt["data"][stop_i]["timings"][timing_i] = int((utc2dt(timing) - rt["request_time"]).total_seconds()) if timing is not "" else None
+    
+    rt = get_busroute_timing(service, stops, descs)
+    rt.update(service=str(service), route_index=str(route_index))
     return rt
 
 def stop_distance(ServiceNo, RouteIndex, Stop1, Stop2):
@@ -154,13 +177,65 @@ def find_next_bus(rt, stop_id):
             stop_index -= 1
     return None
 
+def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
+    '''Find the location of the next bus approaching stop_id. debug_source, if provided, is an rt dict containing timings to use instead of querying LTADM.'''
+# TODO implement hook for debug_source
+    # directly corresponds to /find_bus/<service>/...
+    # first, get the route...
+    route = data_routes.get(str(service), {}).get(str(route_index), {})
+    # search backwards from the given stop
+    route.reverse()
+
+    stops = [stop["BusStopCode"] for stop in route]
+    try:
+        stop_first_index = stops.index(stop_id)
+    except ValueError:
+        raise ValueError("Stop not in route: service={0} route_index={1} stop_id={2}".format(service, route_index, stop_id))
+
+    # truncate working data
+    route = route[stop_first_index:]
+    stops = stops[stop_first_index:]
+    descs = [data_stops[str(stop)]["Description"] for stop in stops]
+    
+    # remember, this is in reverse
+    rt = []
+    found = None
+    threshold = 60
+    source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stops)
+    for stop_timing in source:
+        rt.append(stop_timing)
+        if not stop_timing["timings"][0]:
+            raise RuntimeError("No timings available")
+        if stop_timing["timings"][0] < threshold:
+            found = rt[-1]["stop"]
+            break
+        
+        cur_index = rt.index(stop_timing)
+        if cur_index == 0:
+            continue
+        elif rt[cur_index]["timings"][0] > rt[cur_index - 1]["timings"][0]:
+            found = rt[-2]["stop"]
+            break
+        
+    # TODO: then if the converted time is less than threshold OR it suddenly jumps backward, note it as the location of the next bus
+    return {
+        "stop": found,
+        # "stop_index": rt[-2][,
+        # badly named variables!
+        "stop_distance": stop_distance(service, route_index, stop_id, found)
+    }, rt
+         
+
 def route_ends(service, route_index):
     '''Get details about the two ends of the given route.'''
     route = data_routes.get(str(service), {}).get(str(route_index), {})
     if route == {}:
         return None
     else:
-        return {"first_stop": data_stops.get(route[0]["BusStopCode"], {}), "last_stop": data_stops.get(route[-1]["BusStopCode"], {})}
+        return {
+            "first_stop": data_stops.get(route[0]["BusStopCode"], {}),
+            "last_stop": data_stops.get(route[-1]["BusStopCode"], {})
+        }
     
 
 def main():
