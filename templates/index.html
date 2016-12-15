@@ -5,6 +5,14 @@
 		<meta name="viewport" content="initial-scale=1.0"/>
 		<meta charset="utf-8"/>
 		<style>
+			h1
+			{
+				font-size: 30px;
+			}
+			h2
+			{
+				font-size: 16px;
+			}
 			#map_canvas
 			{
 				height: 100%;
@@ -29,7 +37,7 @@
 	  		}
 	  		.container
 	  		{
-	  		    width: 20%;
+	  		    /*width: 20%;*/
 	  		    /*display: inline-block;*/
 	  		}
 	  		.dlg
@@ -40,10 +48,11 @@
 	  			z-index: 20;
 	  			width: 50%;
 	  			height: 50%;
-	  			top: 25%;
+	  			top: 10%;
 	  			left: 25%;
 	  		    background-color: #FFFFFF;
 	  		    opacity: 0.8;
+	  		    overflow: scroll;
 	  		}
 	  		
 
@@ -90,21 +99,37 @@
         	drawn_markers = [];
         }
         
+        var drawn_polyline = null;
         function draw_route(rt)
         {
-        	remove_markers();
-        	// var markers = [];
         	// Draw route line (really point-to-point) on the map. Should write a better version
+        	// remove existing line
+        	if (drawn_polyline != null)
+        	{
+        		drawn_polyline.setMap(null);
+        		drawn_polyline = null;
+        	}
+        	remove_markers();
+        	
         	var bounds = new google.maps.LatLngBounds();
+        	var line_coords = [];
         	$.each(rt, function(k,v){
-        		var marker = new google.maps.Marker({
-        			position: {lat: v.lat, lng: v.lng},
-        			title: v.desc,
-        			map: map
-        		});
-        		bounds.extend(marker.getPosition());
-        		drawn_markers.push(marker);
+        		var coords = {lat: v.lat, lng: v.lng};
+        		bounds.extend(coords);
+        		line_coords.push(coords);
         	});
+        	drawn_polyline = new google.maps.Polyline({
+        		path: line_coords,
+        		strokeColor: "#FF0000",
+        		strokeWeight: 3
+        	});
+        	drawn_polyline.setMap(map);
+        	
+        	// draw marker at first coord
+        	drawn_markers.push(new google.maps.Marker({
+        		position: line_coords[0],
+        		map: map
+        	}));
         	
 			map.fitBounds(bounds);
         	return;
