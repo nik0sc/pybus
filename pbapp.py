@@ -20,6 +20,17 @@ def find_bus(service, route_index, stop_id):
     # WARNING! The structure of the returned object has changed!
     return json.dumps(pybus.find_next_bus_efficient(service, route_index, stop_id)[0])
 
+@app.route("/find_bus_extra/<service>/<route_index>/<stop_id>")
+def find_bus_extra(service, route_index, stop_id):
+    try:
+        res = pybus.find_next_bus_efficient(service, route_index, stop_id)
+    except ValueError as e:
+        return json.dumps({"error": "stop not in route"}), 500
+    except RuntimeError as e:
+        return json.dumps({"error": "no bus timings available"}), 500
+
+    return json.dumps({"next_bus": res[0], "rt": res[1]})
+
 @app.route("/route_ends/<service>/<route_index>")
 def route_ends(service, route_index):
     return json.dumps(pybus.route_ends(service, route_index))

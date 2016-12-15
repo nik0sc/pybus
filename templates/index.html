@@ -17,12 +17,18 @@
 	  		}
 	  		#inputs
 	  		{
+	  			/* make the inputs div float above*/
 	  		    position: fixed;
 	  		    z-index: 10;
-	  		    display: inline-block;
+	  		    /*display: inline-block;*/
 	  		    width: 70%;
 	  		    bottom: 0;
 	  		    
+	  		}
+	  		.container
+	  		{
+	  		    width: 20%;
+	  		    /*display: inline-block;*/
 	  		}
 
 		</style>
@@ -37,13 +43,18 @@
             $(element).empty();
             // then update
             // $.each(entries, function(i,v){ (is there a jQuery.zip()?)
+            $(element).append($("<option disabled selected>Pick one...</option>"))
             for (var i = 0; i < entries.length; i++){
                 $(element).append($("<option></option>")
                     .attr("value", values[i])
                     .text(entries[i]));
             } // );
             return;
-        };
+        }
+        
+        function draw_route(rt){
+        	// Draw route line (really point-to-point) on the map. Should write a better version
+        }
 
 		// execute when page ready
 		$(function(){
@@ -82,17 +93,23 @@
 			});
 
             $("#btn_find").click(function(){
-                var url = "/find_bus/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
+            	// prevent further button presses
+            	$(this).prop("disabled", true);
+                var url = "/find_bus_extra/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
                 $("#find_url").empty().append(url);
                 // make the request
                 $.getJSON(url, function(data){
                     // attach it to the page
-                    var text = "Your bus is " + data.stop_distance + " stops away. It's now at " + data.stop + ".";
+                    var text = "Your bus is " + data.next_bus.stop_distance + " stops away. It's now at " + data.next_bus.stop + ".";
                     $("#find_result").empty().append(text);
                 })
                 .fail(function(){
-                    $("#find_result").empty().append("find_bus failed, see server console");
-                });
+                    $("#find_result").empty().append("find_bus failed, see server console (" + data.error + ")");
+                })
+                .always(function(){
+                	// once the XHR is finished, allow more presses
+                	$("#btn_find").prop("disabled", false);
+            	});
             });
 
 			// update services
@@ -114,16 +131,17 @@
 	    </div><!--  id="about" -->
 	
 	    <div id="inputs">
-		    <div>service:</div>
-		    <div id="container_service"><select id="list_service"></select></div> 
 
-            <div>route:</div>
-            <div id="container_route"><select id="list_route"></select></div>
+		    <div id="container_service" class="container">		    <div>service:</div><select id="list_service"></select></div> 
 
-            <div>stop:</div>
-            <div id="container_stop"><select id="list_stop"></select></div>
 
-            <div id="container_find"><button id="btn_find" type="button">Find bus</button></div><div id="find_url">#find_url</div><div id="find_result">#find_result</div>
+            <div id="container_route" class="container">            <div>route:</div><select id="list_route"></select></div>
+
+
+            <div id="container_stop" class="container">            <div>stop:</div><select id="list_stop"></select></div>
+
+            <div id="container_find" class="container"><button id="btn_find" type="button">Find bus</button></div>
+            <div id="find_url">#find_url</div><div id="find_result">#find_result</div>
         </div><!-- id="inputs" -->
 	</body>
 </html>

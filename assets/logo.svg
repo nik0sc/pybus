@@ -16,7 +16,10 @@
    id="svg3523"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/nikos/pybus/assets/logo.svg.200.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs3525">
     <symbol
@@ -38,7 +41,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2.0624926"
      inkscape:cx="220.79325"
-     inkscape:cy="100.93948"
+     inkscape:cy="57.697899"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
