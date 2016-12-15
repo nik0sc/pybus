@@ -97,3 +97,7 @@ pydev
 
 # version info for app
 commithash
+
+# temp files by editor
+*~
+.*.swp

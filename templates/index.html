@@ -1,217 +1,16 @@
 <!DOCTYPE html>
+<!-- pybus front-end HTML, Nikos Chan, 2016 -->
+<!-- https://github.com/nik0sc/pybus -->
 <html>
 	<head>
 		<title>pbapp</title>
 		<meta name="viewport" content="initial-scale=1.0"/>
 		<meta charset="utf-8"/>
-		<style>
-			h1
-			{
-				font-size: 30px;
-			}
-			h2
-			{
-				font-size: 16px;
-			}
-			#map_canvas
-			{
-				height: 100%;
-			}
-			html, body
-			{
-				height: 100%;
-				margin: 0;
-				padding: 0;
-	  		}
-	  		#inputs
-	  		{
-	  			/* make the inputs div float above*/
-	  		    position: fixed;
-	  		    z-index: 10;
-	  		    /*display: inline-block;*/
-	  		    width: 100%;
-	  		    bottom: 0;
-	  		    background-color: #FFFFFF;
-	  		    opacity: 0.8;
-	  		    
-	  		}
-	  		.container
-	  		{
-	  		    /*width: 20%;*/
-	  		    /*display: inline-block;*/
-	  		}
-	  		.dlg
-	  		{
-	  			/* don't display at first */
-	  			display: none;
-	  			position: fixed;
-	  			z-index: 20;
-	  			width: 50%;
-	  			height: 50%;
-	  			top: 10%;
-	  			left: 25%;
-	  		    background-color: #FFFFFF;
-	  		    opacity: 0.8;
-	  		    overflow: scroll;
-	  		}
-	  		
-
-		</style>
+		<link href="/css/styles.css" rel="stylesheet"/>
 		<!-- devt version -->
-		<script src="jquery-3.1.1.js"></script>
+		<script src="/js/jquery-3.1.1.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyD1AZHujMfdFVxpPfWCKn0HyKcmGlFoU-o" async defer></script>
-		<script>
-		var map;
-		
-		function initMap()
-		{
-			map = new google.maps.Map(document.getElementById("map_canvas"), {
-				// Toa Payoh, Bishan, Serangoon, Ubi
-				center: {lat: 1.3404926, lng: 103.8622066},
-				zoom: 15
-			});
-		}
-		
-        function update_options(element, entries, values)
-        {
-            //if (typeof values == "undefined"){
-            //    values = entries;
-            //}
-            // remove child nodes (all option elements)
-            $(element).empty();
-            // then update
-            // $.each(entries, function(i,v){ (is there a jQuery.zip()?)
-            $(element).append($("<option disabled selected>Pick one...</option>"))
-            for (var i = 0; i < entries.length; i++){
-                $(element).append($("<option></option>")
-                    .attr("value", values[i])
-                    .text(entries[i]));
-            } // );
-            return;
-        }
-        
-        var drawn_markers = [];
-        function remove_markers()
-        {
-        	$.each(drawn_markers, function(k,v){
-        		v.setMap(null);
-        	});
-        	drawn_markers = [];
-        }
-        
-        var drawn_polyline = null;
-        function draw_route(rt)
-        {
-        	// Draw route line (really point-to-point) on the map. Should write a better version
-        	// remove existing line
-        	if (drawn_polyline != null)
-        	{
-        		drawn_polyline.setMap(null);
-        		drawn_polyline = null;
-        	}
-        	remove_markers();
-        	
-        	var bounds = new google.maps.LatLngBounds();
-        	var line_coords = [];
-        	$.each(rt, function(k,v){
-        		var coords = {lat: v.lat, lng: v.lng};
-        		bounds.extend(coords);
-        		line_coords.push(coords);
-        	});
-        	drawn_polyline = new google.maps.Polyline({
-        		path: line_coords,
-        		strokeColor: "#FF0000",
-        		strokeWeight: 3
-        	});
-        	drawn_polyline.setMap(map);
-        	
-        	// draw marker at first coord
-        	drawn_markers.push(new google.maps.Marker({
-        		position: line_coords[0],
-        		map: map
-        	}));
-        	
-			map.fitBounds(bounds);
-        	return;
-        }
-       
-
-		// execute when page ready
-		$(function(){
-            // event handlers for <select>s	
-			$("#list_service").change(function(){
-				// update routes accordingly
-				var svc = $(this).val();
-                $.getJSON("/routes/" + svc, function(data){
-                    var entries = [];
-                    var values = [];
-                    // construct the strings to insert in #list_route
-                    $.each(data, function(i, v){
-                        entries.push(i + ": " + v.first_stop.Description + " to " + v.last_stop.Description);
-                        values.push(i);
-                    }); 
-                    update_options("#list_route", entries, values);
-                });
-                // force update of stops
-                $("#list_route").change();
-			});
-
-			$("#list_route").change(function(){
-				// update routes accordingly
-				var svc = $("#list_service").val();
-                var route = $(this).val();
-                $.getJSON("/stops/" + svc + "/" + route, function(data){
-                    var entries = [];
-                    var values = [];
-                    // construct the strings to insert in #list_stop
-                    $.each(data, function(i, v){
-                        entries.push(v.BusStopCode + ": " + v.Description);
-                        values.push(v.BusStopCode);
-                    });
-                   update_options("#list_stop", entries, values);
-                });
-			});
-
-            $("#btn_find").click(function(){
-            	// prevent further button presses
-            	$(this).prop("disabled", true);
-                var url = "/find_bus_extra/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
-                $("#find_url").empty().append(url);
-                // make the request
-                $.getJSON(url, function(data){
-                    // attach it to the page
-                    var text = "Your bus is " + data.next_bus.stop_distance + " stops away. It's now at " + data.next_bus.stop+ " " + data.next_bus.desc + ".";
-                    $("#find_result").empty().append(text);
-                    draw_route(data.rt);
-                })
-                .fail(function(data){
-                    //$("#find_result").empty().append("find_bus failed, see server console (" + data.error + ")");
-                    $("#find_result").empty().append("find_bus failed, see server console");
-                })
-                .always(function(){
-                	// once the XHR is finished, allow more presses
-                	$("#btn_find").prop("disabled", false);
-            	});
-            });
-
-			$("#about_link").click(function(){
-				$("#about").show();
-			});
-			
-			$("#about_close").click(function(){
-				$("#about").hide();
-			});
-
-			// update services
-			$.getJSON("/services", function(data){
-				update_options("#list_service", data, data);
-                // force update of routes etc
-                $("#list_service").change();
-			});
-
-		// end of $(function(){ ...
-		});
-		</script>
+		<script src="/js/pbapp.js"></script>
 	</head>
 	<body>
 		<div id="map_canvas"></div>
@@ -225,17 +24,11 @@
 	    </div><!--  id="about" -->
 	
 	    <div id="inputs">
-
-		    <div id="container_service" class="container">		    <div>service:</div><select id="list_service"></select></div> 
-
-
-            <div id="container_route" class="container">            <div>route:</div><select id="list_route"></select></div>
-
-
-            <div id="container_stop" class="container">            <div>stop:</div><select id="list_stop"></select></div>
-
+		    <div id="container_service" class="container"><div>service:</div><select id="list_service"></select></div> 
+            <div id="container_route" class="container"><div>route:</div><select id="list_route"></select></div>
+            <div id="container_stop" class="container"><div>stop:</div><select id="list_stop"></select></div>
             <div id="container_find" class="container"><button id="btn_find" type="button">Find bus</button></div>
-            <div id="find_url">#find_url</div><div id="find_result">#find_result</div>
+            <div id="find_result">#find_result</div>
             <div><a href="#" id="about_link">About</a></div>
         </div><!-- id="inputs" -->
 	</body>

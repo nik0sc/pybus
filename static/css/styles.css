@@ -1,0 +1,54 @@
+/** pybus front-end CSS
+ ** Nikos Chan, 2016
+ ** https://github.com/nik0sc/pybus
+ */
+
+h1
+{
+	font-size: 30px;
+}
+h2
+{
+	font-size: 16px;
+}
+#map_canvas
+{
+	height: 100%;
+}
+html, body
+{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#inputs
+{
+	/* make the inputs div float above*/
+    position: fixed;
+    z-index: 10;
+    /*display: inline-block;*/
+    width: 100%;
+    bottom: 0;
+    background-color: #FFFFFF;
+    opacity: 0.8;
+    
+}
+.container
+{
+    /*width: 20%;*/
+    /*display: inline-block;*/
+}
+.dlg
+{
+	/* don't display at first */
+	display: none;
+	position: fixed;
+	z-index: 20;
+	width: 50%;
+	height: 50%;
+	top: 10%;
+	left: 25%;
+    background-color: #FFFFFF;
+    opacity: 0.8;
+    overflow: scroll;
+}
