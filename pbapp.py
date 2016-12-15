@@ -9,9 +9,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # some globals
-with open("commithash", "r") as f:
-    commit_hash = f.read()
+#with open("commithash", "r") as f:
+#    commit_hash = f.read()
 
+commit_hash = os.getenv("HEROKU_SLUG_DESCRIPTION")
 heroku_release_version = os.getenv("HEROKU_RELEASE_VERSION")
 
 @app.route("/find_bus/<service>/<route_index>/<stop_id>")
