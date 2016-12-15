@@ -186,28 +186,38 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
     # search backwards from the given stop
     route.reverse()
 
-    stops = [stop["BusStopCode"] for stop in route]
+    stop_codes = [stop["BusStopCode"] for stop in route]
     try:
-        stop_first_index = stops.index(stop_id)
+        stop_first_index = stop_codes.index(stop_id)
     except ValueError:
         raise ValueError("Stop not in route: service={0} route_index={1} stop_id={2}".format(service, route_index, stop_id))
 
     # truncate working data
     route = route[stop_first_index:]
-    stops = stops[stop_first_index:]
-    descs = [data_stops[str(stop)]["Description"] for stop in stops]
+    stop_codes = stop_codes[stop_first_index:]
+    
+    # cached stop data
+    stop_gen = (data_stops[str(stop_code)] for stop_code in stop_codes)
     
     # remember, this is in reverse
     rt = []
     found = None
+    method_used = None
     threshold = 60
-    source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stops)
+    source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stop_codes)
     for stop_timing in source:
+        data_stop = next(stop_gen)
+        stop_timing.update(
+            desc=data_stop["Description"],
+            lat=data_stop["Latitude"],
+            lng=data_stop["Longitude"]
+        )
         rt.append(stop_timing)
         if not stop_timing["timings"][0]:
             raise RuntimeError("No timings available")
         if stop_timing["timings"][0] < threshold:
             found = rt[-1]["stop"]
+            method_used = "threshold"
             break
         
         cur_index = rt.index(stop_timing)
@@ -215,6 +225,7 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
             continue
         elif rt[cur_index]["timings"][0] > rt[cur_index - 1]["timings"][0]:
             found = rt[-2]["stop"]
+            method_used = "jump"
             break
         
     # TODO: then if the converted time is less than threshold OR it suddenly jumps backward, note it as the location of the next bus
@@ -222,7 +233,9 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
         "stop": found,
         # "stop_index": rt[-2][,
         # badly named variables!
-        "stop_distance": stop_distance(service, route_index, stop_id, found)
+        "stop_distance": stop_distance(service, route_index, stop_id, found),
+        "method_used": method_used,
+        "desc": rt[-1]["desc"]
     }, rt
          
 
