@@ -19,12 +19,12 @@ heroku_release_version = os.getenv("HEROKU_RELEASE_VERSION")
 def find_bus(service, route_index, stop_id):
     # return json.dumps(pybus.find_next_bus(pybus.get_rt_cached(service, route_index), stop_id))
     # WARNING! The structure of the returned object has changed!
-    return json.dumps(pybus.find_next_bus_efficient(service, route_index, stop_id)[0])
+    return json.dumps(pybus.find_next_bus(service, route_index, stop_id)[0])
 
 @app.route("/find_bus_extra/<service>/<route_index>/<stop_id>")
 def find_bus_extra(service, route_index, stop_id):
     try:
-        res = pybus.find_next_bus_efficient(service, route_index, stop_id)
+        res = pybus.find_next_bus(service, route_index, stop_id)
     except ValueError as e:
         return json.dumps({"error": "stop not in route"}), 500
     except RuntimeError as e:
@@ -49,7 +49,7 @@ def get_routes(service):
 
 @app.route("/stops/<service>/<route>")
 def get_stops(service, route):
-    stop_nos = [x["BusStopCode"] for x in pybus.data_routes.get(service, {}).get(route, {})]
+    stop_nos = [x["BusStopCode"] for x in pybus.data_routes.get(service, {}).get(route, {}) if x["BusStopCode"] not in pybus.data_bad_stops]
     # stop_descs = [pybus.data_stops.get(x, {}).get("Description", "") for x in stop_nos]
     stops = [pybus.data_stops.get(x, {}) for x in stop_nos]
     return json.dumps(stops)
@@ -57,7 +57,11 @@ def get_stops(service, route):
 @app.route("/")
 @app.route("/index.html")
 def index():
-    return render_template("index.html", commit_hash=commit_hash, heroku_release_version=heroku_release_version)
+    return render_template("index.html",
+        commit_hash=commit_hash,
+        heroku_release_version=heroku_release_version,
+        services=list(natsorted(pybus.data_routes.keys()))
+    )
 
 # statics
 @app.route("/<path:path>")

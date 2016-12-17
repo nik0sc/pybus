@@ -26,6 +26,10 @@ with open("data/busroutes.json", "r") as f:
 with open("data/busstops.json", "r") as f:
     data_stops = json.load(f) 
 
+with open("data/bad_stops.json", "r") as f:
+    # http://stackoverflow.com/questions/2831212/python-sets-vs-lists
+    data_bad_stops = frozenset(json.load(f))
+
 print("Loaded cached data")
 
 def get_ltadm_obj(url, timestamp=True):
@@ -155,29 +159,7 @@ def interpolate_rt(route):
     '''Interpolate missing route timings using distance between stops.'''
     pass
 
-def find_next_bus(rt, stop_id):
-    '''Find the next bus approaching stop. If a bus is found then this function returns a dict containing the stop id of the stop before the bus ("stop") and its index in the route ("stop_index").'''
-    # find the member of the rt list corresponding to stop_id
-    try:
-        stop_index = next((k for k,v in enumerate(rt["data"]) if v["stop"] == str(stop_id)))
-    except StopIteration:
-        return
-
-    # work backwards and find the first stop with a bus less than 60 seconds away (this is what LTA says the "Arr" indication means) 
-    distance = 60
-    while stop_index > 0:
-        # if (rt["data"][stop_index]["timings"][0] - rt["request_time"]).total_seconds() < distance:
-        if rt["data"][stop_index]["timings"][0] < distance:
-            return {
-                "stop": rt["data"][stop_index]["stop"],
-                "stop_index": stop_index,
-                "stop_distance": stop_distance(rt["service"], rt["route_index"], rt["data"][stop_index]["stop"], stop_id)
-            }
-        else:
-            stop_index -= 1
-    return None
-
-def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
+def find_next_bus(service, route_index, stop_id, debug_source=None):
     '''Find the location of the next bus approaching stop_id. debug_source, if provided, is an rt dict containing timings to use instead of querying LTADM.'''
 # TODO implement hook for debug_source
     # directly corresponds to /find_bus/<service>/...
@@ -186,7 +168,8 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
     # search backwards from the given stop
     route.reverse()
 
-    stop_codes = [stop["BusStopCode"] for stop in route]
+    stop_codes = [stop["BusStopCode"] for stop in route if stop["BusStopCode"] not in data_bad_stops]
+    
     try:
         stop_first_index = stop_codes.index(stop_id)
     except ValueError:
@@ -213,7 +196,7 @@ def find_next_bus_efficient(service, route_index, stop_id, debug_source=None):
             lng=data_stop["Longitude"]
         )
         rt.append(stop_timing)
-        if not stop_timing["timings"][0]:
+        if not stop_timing["timings"] or not stop_timing["timings"][0]:
             raise RuntimeError("No timings available")
         if stop_timing["timings"][0] < threshold:
             found = rt[-1]["stop"]
@@ -274,7 +257,7 @@ def main():
             print("Find next bus approaching stop.")
             print("usage:" + sys.argv[0] + "-f ServiceNo RouteIndex BusStopID")
             quit()
-        pprint(find_next_bus(get_rt_cached(*sys.argv[2:4]), sys.argv[4]), indent=4)
+        pprint(find_next_bus(*sys.argv[2:5]), indent=4)
 
 if __name__ == "__main__":
     # run as script

@@ -2,17 +2,7 @@
  **	Nikos Chan, 2016  
  ** https://github.com/nik0sc/pybus
  */
-
-var map;
-
-function initMap()
-{
-	map = new google.maps.Map(document.getElementById("map_canvas"), {
-		// Toa Payoh, Bishan, Serangoon, Ubi
-		center: {lat: 1.3404926, lng: 103.8622066},
-		zoom: 15
-	});
-}
+"use strict";
 
 function update_options(element, entries, values)
 {
@@ -60,6 +50,24 @@ function draw_route(rt)
 		bounds.extend(coords);
 		line_coords.push(coords);
 		// TODO: draw a simple stop icon here
+		if (k == 0)
+		{
+			// draw marker at first coord
+			drawn_markers.push(new google.maps.Marker({
+				position: coords,
+				map: map
+			}));
+		}
+		else
+		{
+			drawn_markers.push(new google.maps.Marker({
+				position: coords,
+				map: map
+				/*icon: {
+					url: "/img/"
+				}*/
+			}));
+		}
 	});
 	drawn_polyline = new google.maps.Polyline({
 		path: line_coords,
@@ -68,11 +76,7 @@ function draw_route(rt)
 	});
 	drawn_polyline.setMap(map);
 	
-	// draw marker at first coord
-	drawn_markers.push(new google.maps.Marker({
-		position: line_coords[0],
-		map: map
-	}));
+
 	
 	// TODO: draw a bus icon between the last and second-last coords
 	if (line_coords.length >= 2){
@@ -81,7 +85,15 @@ function draw_route(rt)
 			lat: (line_coords[line_coords.length - 1].lat + line_coords[line_coords.length - 2].lat) / 2,
 			lng: (line_coords[line_coords.length - 1].lng + line_coords[line_coords.length - 2].lng) / 2
 		};
-		// then some means of finding the angle between these points, what, like real math???
+		drawn_markers.push(new google.maps.Marker({
+			position: midpoint,
+			map: map,
+			icon: {
+				url: "/img/bus.90.png",
+				scaledSize: new google.maps.Size(48, 50),
+				anchor: new google.maps.Point(24, 25)
+			}
+		}));
 	}
 	// TODO: or else draw a bus icon approaching the only coords
 	else
@@ -132,13 +144,14 @@ $(function(){
     $("#btn_find").click(function(){
     	// prevent further button presses
     	$(this).prop("disabled", true);
+    	$("#find_result").empty().append("Finding...");
         var url = "/find_bus_extra/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
         // $("#find_url").empty().append(url);
         // make the request
         $.getJSON(url, function(data){
-        	var next_mins = 
+        	var next_mins = null; 
             // attach it to the page
-            var text = "Your bus is " + data.next_bus.stop_distance + " stops away, or " + data.rt[0].timings[0] + " seconds away. It's now at " + data.next_bus.stop+ " " + data.next_bus.desc + ".";
+            var text = "Your bus is " + data.next_bus.stop_distance + " stops away, or " + data.rt[0].timings[0] + " seconds away. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
             $("#find_result").empty().append(text);
             draw_route(data.rt);
         })
@@ -152,20 +165,15 @@ $(function(){
     	});
     });
 
-	$("#about_link").click(function(){
-		$("#about").show();
-	});
+	// force update of routes etc
+	//$("#list_service").change();
 	
-	$("#about_close").click(function(){
-		$("#about").hide();
-	});
-
-	// update services
-	$.getJSON("/services", function(data){
-		update_options("#list_service", data, data);
-        // force update of routes etc
-        $("#list_service").change();
-	});
+	// resize map_canvas div on browser resize
+	$(window).resize(function(){
+		$("#map_canvas").height($("body").height() - $("#inputs").outerHeight());
+	})
+	// and fire the event now
+	.resize();
 
 // end of $(function(){ ...
 });

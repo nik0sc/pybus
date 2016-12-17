@@ -3,33 +3,93 @@
 <!-- https://github.com/nik0sc/pybus -->
 <html>
 	<head>
-		<title>pbapp</title>
+		<title>Bus Finder</title>
 		<meta name="viewport" content="initial-scale=1.0"/>
 		<meta charset="utf-8"/>
+		
+		<!-- Bootstrap recommends these CDN links -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link href="/css/styles.css" rel="stylesheet"/>
-		<!-- devt version -->
-		<script src="/js/jquery-3.1.1.js"></script>
+		
+		<script>
+		// order is important! place initMap callback here to avoid undefined errors
+		var map;
+
+		function initMap()
+		{
+			map = new google.maps.Map(document.getElementById("map_canvas"), {
+				// Toa Payoh, Bishan, Serangoon, Ubi
+				center: {lat: 1.3404926, lng: 103.8622066},
+				zoom: 15
+			});
+		}
+		</script>
 		<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyD1AZHujMfdFVxpPfWCKn0HyKcmGlFoU-o" async defer></script>
-		<script src="/js/pbapp.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" defer></script> 
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer></script>
+		<script src="/js/pbapp.js" defer></script>
 	</head>
 	<body>
 		<div id="map_canvas"></div>
 
-	    <div id="about" class="dlg">
-	        <h1>Bus Finder</h1>
-	        <h2>Find the next bus that will approach your stop. 1 stop? Sit tight. 5 stops? Lim kopi. 10 stops? Take an Uber.</h2>
-	        <p>All data comes from <a href="https://www.mytransport.sg/content/mytransport/home/dataMall.html">LTA's DataMall service</a>. If the app can't find the next bus, it's possible that the data from LTA DataMall is bad.</p>
-	        <p><a href="https://github.com/nik0sc/pybus">pybus</a> {{ commit_hash }} ({{ heroku_release_version }})</p> 
-	        <p><a href="#" id="about_close">Close</a></p>
+	    <div id="about" class="modal fade" role="dialog">
+	    	<div class="modal-dialog">
+			    <div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Bus Finder</h3>
+					</div>
+					<div class="modal-body">
+						<p><strong>Find the next bus that will approach your stop. 1 stop? Sit tight. 5 stops? Lim kopi. 10 stops? Take an Uber.</strong></p>
+						<p>Select a service, then a route (direction), then finally the stop you're at. Bus Finder will show you how far away the nearest bus is!</p>
+						<p>All data comes from <a href="https://www.mytransport.sg/content/mytransport/home/dataMall.html">LTA's DataMall service</a>. If the app can't find the next bus, it's possible that the data from LTA DataMall is bad.</p>
+						<p><a href="https://github.com/nik0sc/pybus">pybus</a> {{ commit_hash }} ({{ heroku_release_version }})</p> 
+					</div>
+					<div class="modal-footer">
+						<button id="btn_about_close" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+		    	</div>
+        	</div>
 	    </div><!--  id="about" -->
 	
-	    <div id="inputs">
-		    <div id="container_service" class="container"><div>service:</div><select id="list_service"></select></div> 
-            <div id="container_route" class="container"><div>route:</div><select id="list_route"></select></div>
-            <div id="container_stop" class="container"><div>stop:</div><select id="list_stop"></select></div>
-            <div id="container_find" class="container"><button id="btn_find" type="button">Find bus</button></div>
-            <div id="find_result">#find_result</div>
-            <div><a href="#" id="about_link">About</a></div>
+	    <div id="inputs" class="container">
+	    	<div class="row">
+				<div class="col-sm-2 form-group">
+					<label for="list_service">Service</label>
+					<!-- Speed up the initial render by avoiding a request to /service -->
+					<select class="form-control" id="list_service">
+						<option disabled selected>Pick one...</option>
+						{% for service in services %}
+							<option value="{{ service }}">{{ service }}</option>
+						{% endfor %}
+					</select>
+				</div> 
+		        <div class="col-sm-4 form-group">
+					<label for="list_route">Route</label>
+					<select class="form-control" id="list_route">
+						<option disabled selected>Pick one...</option>
+					</select>
+	        	</div>
+		        <div class="col-sm-4 form-group">
+					<label for="list_stop">Stop</label>
+					<select class="form-control" id="list_stop">
+						<option disabled selected>Pick one...</option>
+					</select>
+	        	</div>
+		        <div class="col-sm-2 form-group input-buttons">
+		        	<button id="btn_find" type="button" class="btn btn-primary">
+		        		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		        		Find bus
+	        		</button>
+		        	<button id="btn_about" type="button" class="btn btn-default" data-toggle="modal" data-target="#about">About</button>
+	        	</div>
+	      	</div>
+	      	<div class="row" id="find_result"><div class="col-sm-12">
+		        	#find_result
+            </div></div>
         </div><!-- id="inputs" -->
 	</body>
 </html>

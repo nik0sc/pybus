@@ -50,8 +50,20 @@ def check_busroutes(x):
 						break
 	return ok
 
+def bad_stops(all_stops):
+	'''Find bad stops and report them'''
+	# Rule 1: Description is Non Stop or Express
+	desc_rule = [x["BusStopCode"] for x in all_stops.values() if x["Description"] in ["Non Stop", "Express"]]
+	# Rule 2: Latitude/Longitude is 0
+	assert([x for x in data_stops.values() if x["Latitude"] == 0] == [x for x in data_stops.values() if x["Longitude"] == 0])
+	coords_rule = [x["BusStopCode"] for x in all_stops.values() if x["Latitude"] == 0]
+
+	# combine (| meaning 'or'/union)
+	return list(set(desc_rule) | set(coords_rule))
+	
+
 def rt2dbgsrc(rt):
-    '''Convert result of get_busroute_timing into something suitable for the debug_source arg of find_next_bus_efficient.'''
+    '''Convert result of get_busroute_timing into something suitable for the debug_source arg of find_next_bus.'''
     pass
 
 def main():
