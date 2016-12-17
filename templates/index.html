@@ -4,7 +4,10 @@
 <html>
 	<head>
 		<title>Bus Finder</title>
-		<meta name="viewport" content="initial-scale=1.0"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="mobile-web-app-capable" content="yes"/>
 		<meta charset="utf-8"/>
 		
 		<!-- Bootstrap recommends these CDN links -->
@@ -31,6 +34,8 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" defer></script> 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer></script>
+		<!-- fuelux's combobox plugin -->
+		<script src="/js/combobox.js" defer></script>
 		<script src="/js/pbapp.js" defer></script>
 	</head>
 	<body>
@@ -58,14 +63,21 @@
 	    <div id="inputs" class="container">
 	    	<div class="row">
 				<div class="col-sm-2 form-group">
-					<label for="list_service">Service</label>
-					<!-- Speed up the initial render by avoiding a request to /service -->
-					<select class="form-control" id="list_service">
-						<option disabled selected>Pick one...</option>
-						{% for service in services %}
-							<option value="{{ service }}">{{ service }}</option>
-						{% endfor %}
-					</select>
+					<label for="combo_service">Service</label>
+					<!-- SMLJ? http://getfuelux.com/javascript.html#combobox-examples -->
+					<div class="input-group input-append dropdown combobox" data-initialize="combobox" id="combo_service">
+					  <input id="combo_text_service" type="text" class="form-control">
+					  <!-- There's almost certainly no room for the dropdown at the bottom, so use a dropup -->
+					  <div class="input-group-btn dropup">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right">
+						  <!-- Speed up the initial render by avoiding a request to /service -->
+						  {% for service in services %}
+						  <li data-value="{{ service }}"><a href="#">{{ service }}</a></li>
+						  {% endfor %}
+						</ul>
+					  </div>
+					</div>
 				</div> 
 		        <div class="col-sm-4 form-group">
 					<label for="list_route">Route</label>
@@ -92,4 +104,4 @@
             </div></div>
         </div><!-- id="inputs" -->
 	</body>
-</html>
+</html>l

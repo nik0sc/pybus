@@ -107,11 +107,13 @@ function draw_route(rt)
 
 // execute when page ready
 $(function(){
-    // event handlers for <select>s	
-	$("#list_service").change(function(){
+    // init plugin
+    $("#combo_service").combobox();
+    
+    // event handlers for inputs    	
+	$("#combo_service").on("changed.fu.combobox", function(event, data){
 		// update routes accordingly
-		var svc = $(this).val();
-        $.getJSON("/routes/" + svc, function(data){
+        $.getJSON("/routes/" + data.text, function(data){
             var entries = [];
             var values = [];
             // construct the strings to insert in #list_route
@@ -126,8 +128,8 @@ $(function(){
 	});
 
 	$("#list_route").change(function(){
-		// update routes accordingly
-		var svc = $("#list_service").val();
+		// update stops accordingly
+		var svc = $("#combo_service").combobox("selectedItem").text;
         var route = $(this).val();
         $.getJSON("/stops/" + svc + "/" + route, function(data){
             var entries = [];
@@ -145,7 +147,7 @@ $(function(){
     	// prevent further button presses
     	$(this).prop("disabled", true);
     	$("#find_result").empty().append("Finding...");
-        var url = "/find_bus_extra/" + $("#list_service").val()  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
+        var url = "/find_bus_extra/" + $("#combo_service").combobox("selectedItem").text  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
         // $("#find_url").empty().append(url);
         // make the request
         $.getJSON(url, function(data){
@@ -174,6 +176,15 @@ $(function(){
 	})
 	// and fire the event now
 	.resize();
+	
+	/** Some notes from poking around this combobox control:
+	 ** - The changed event fires when an option is selected, or when focus leaves the text input
+	 ** - The event is not fired when the underlying text input is programmatically changed
+	 */
+	$("#combo_text_service").val("Pick one...");
+	
+	
+	//.;
 
 // end of $(function(){ ...
 });

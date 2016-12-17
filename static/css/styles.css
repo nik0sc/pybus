@@ -29,6 +29,14 @@ html, body
 	width: 100%;
 	/* set the height in $(window).resize() */
 }
+.dropdown-menu
+{
+	/* limit height and make scrollable */
+	height: 300px;
+	overflow: scroll;
+	/* follow containing column */
+	min-width: 0px;
+}
 @media (min-width: 1158px)
 {
 	.input-buttons
