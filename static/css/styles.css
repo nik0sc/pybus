@@ -37,6 +37,17 @@ html, body
 	/* follow containing column */
 	min-width: 0px;
 }
+.modal-footer-left
+{
+	/* http://stackoverflow.com/questions/24409495/bootstrap-modal-left-and-right-aligned-content-in-modal-footer */
+	float:left;
+	line-height:34px;
+	color: #AAAAAA;
+	font-style: italic;
+}
+.modal-footer-left > a {
+  	color: #70A7D7;
+}
 @media (min-width: 1158px)
 {
 	.input-buttons
