@@ -167,6 +167,13 @@ $(function(){
     	});
     });
 
+    $("#btn_reset").click(function(){
+            // throw away the app state
+            // recenter the map 
+            // remove all marks
+            // empty the route and stop selects
+    });
+
 	// force update of routes etc
 	//$("#list_service").change();
 	
