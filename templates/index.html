@@ -8,6 +8,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 		<meta name="mobile-web-app-capable" content="yes"/>
+		<!-- What do all these mean?? https://github.com/audreyr/favicon-cheat-sheet -->
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" sizes="196x196" href="/favicon/android-icon-192x192.png"/>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
 		<meta charset="utf-8"/>
 		
 		<!-- Bootstrap recommends these CDN links -->
@@ -20,12 +24,13 @@
 		<script>
 		// order is important! place initMap callback here to avoid undefined errors
 		var map;
+		var map_start = {lat: 1.3404926, lng: 103.8622066};
 
 		function initMap()
 		{
 			map = new google.maps.Map(document.getElementById("map_canvas"), {
 				// Toa Payoh, Bishan, Serangoon, Ubi
-				center: {lat: 1.3404926, lng: 103.8622066},
+				center: map_start,
 				zoom: 15
 			});
 		}
@@ -60,8 +65,35 @@
 		    	</div>
         	</div>
 	    </div><!--  id="about" -->
-	
+	    
+	    <div id="duplicate_stop" class="modal fade" role="dialog">
+	    	<div class="modal-dialog">
+			    <div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Duplicate stop in route!</h3>
+					</div>
+					<div class="modal-body">
+						<p>You chose a stop that appears more than once in this route. <strong>Bus Finder can only tell you how far away the next bus is, not which segment of the route the bus is operating on.</strong> This is a limitation of LTA data.</p>
+						<p>To workaround this problem, try choosing the stop before this one. If this message doesn't appear again, the stop before is unique and won't have this problem.</p>
+						<p>Duplicates can occur at the terminal of a loop service, as well as stops where a service crosses itself.</p>
+					</div>
+					<div class="modal-footer">
+						<button id="btn_about_close" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+		    	</div>
+        	</div>
+	    </div><!--  id="duplicate_stop" -->
+
+		<!-- Floats on top of the inputs but over the map -->
+		<div id="alert_duplicate" class="alert alert-warning alert-dismissible alert-float" role="alert">
+			<button type="button" class="close" id="alert_duplicate_close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			This stop appears more than once in this route. <strong>Bus Finder may not give accurate results.</strong> <a href="#" data-toggle="modal" data-target="#duplicate_stop">Tell me more...</a>
+		</div>	
+		
 	    <div id="inputs" class="container">
+	      	<div class="row"><div id="find_result" class="col-sm-12">
+	        	Do something...
+            </div></div>
 	    	<div class="row">
 				<div class="col-sm-2 form-group">
 					<label for="combo_service">Service</label>
@@ -97,15 +129,12 @@
 		        		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 		        		Find bus
 	        		</button>
-                    <button id="btn_reset" type="button" class="btn btn_default">
+		        	<button id="btn_about" type="button" class="btn btn-default" data-toggle="modal" data-target="#about">About</button>
+                    <button id="btn_reset" type="button" class="btn btn-warning fl-right">
                     Reset
                     </button>
-		        	<button id="btn_about" type="button" class="btn btn-default" data-toggle="modal" data-target="#about">About</button>
 	        	</div>
 	      	</div>
-	      	<div class="row" id="find_result"><div class="col-sm-12">
-	        	Do something...
-            </div></div>
         </div><!-- id="inputs" -->
 	</body>
-</html>l
+</html>

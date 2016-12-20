@@ -32,15 +32,20 @@ function remove_markers()
 }
 
 var drawn_polyline = null;
-function draw_route(rt)
+function remove_polyline()
 {
-	// Draw route line (really point-to-point) on the map. Should write a better version
-	// remove existing line
 	if (drawn_polyline != null)
 	{
 		drawn_polyline.setMap(null);
 		drawn_polyline = null;
 	}
+}
+
+function draw_route(rt)
+{
+	// Draw route line (really point-to-point) on the map. Should write a better version
+	// remove existing line
+    remove_polyline();
 	remove_markers();
 	
 	var bounds = new google.maps.LatLngBounds();
@@ -62,10 +67,11 @@ function draw_route(rt)
 		{
 			drawn_markers.push(new google.maps.Marker({
 				position: coords,
-				map: map
-				/*icon: {
-					url: "/img/"
-				}*/
+				map: map,
+				icon: {
+					url: "/img/stop.90.png",
+					scaledSize: new google.maps.Size(15, 15)
+				}
 			}));
 		}
 	});
@@ -147,19 +153,34 @@ $(function(){
     	// prevent further button presses
     	$(this).prop("disabled", true);
     	$("#find_result").empty().append("Finding...");
+    	$("#alert_duplicate").slideUp();
+    	
         var url = "/find_bus_extra/" + $("#combo_service").combobox("selectedItem").text  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
-        // $("#find_url").empty().append(url);
+        console.log("Making request to "+ url);
+        
         // make the request
         $.getJSON(url, function(data){
-        	var next_mins = null; 
+        	var next_mins =  Math.floor(data.rt[0].timings[0] / 60); 
             // attach it to the page
-            var text = "Your bus is " + data.next_bus.stop_distance + " stops away, or " + data.rt[0].timings[0] + " seconds away. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
+            if (data.next_bus.duplicate)
+            {
+            	// show warning of duplicate stop
+            	$("#alert_duplicate").slideDown();
+            }
+            
+            if (next_mins == 0)
+            {
+            	var text = "Your bus is " + data.next_bus.stop_distance + " stops away, and it's about to arrive in the next minute. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
+        	}
+        	else
+        	{
+        		var text = "Your bus is " + data.next_bus.stop_distance + " stops away, or " + next_mins + " minutes away. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
+        	}
             $("#find_result").empty().append(text);
             draw_route(data.rt);
         })
         .fail(function(data){
-            //$("#find_result").empty().append("find_bus failed, see server console (" + data.error + ")");
-            $("#find_result").empty().append("find_bus failed, see server console");
+            $("#find_result").empty().append("Can't find bus (" + data.responseJSON.error + ")");
         })
         .always(function(){
         	// once the XHR is finished, allow more presses
@@ -168,10 +189,27 @@ $(function(){
     });
 
     $("#btn_reset").click(function(){
-            // throw away the app state
-            // recenter the map 
-            // remove all marks
-            // empty the route and stop selects
+        // throw away the app state
+        // recenter the map 
+        map.panTo(map_start);
+
+        // remove all marks
+        remove_polyline();
+        remove_markers();
+
+        // empty the route and stop selects
+        update_options("#list_route", [], []);
+        update_options("#list_stop", [], []);
+        $("#combo_text_service").val("Pick one...");
+
+        $("#find_result").empty().append("Reset!");
+        $("#btn_find").prop("disabled", false);
+        $("#alert_duplicate").hide();
+            
+    });
+    
+    $("#alert_duplicate_close").click(function(){
+    	$("#alert_duplicate").slideUp();
     });
 
 	// force update of routes etc

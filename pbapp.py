@@ -29,6 +29,9 @@ def find_bus_extra(service, route_index, stop_id):
         return json.dumps({"error": "stop not in route"}), 500
     except RuntimeError as e:
         return json.dumps({"error": "no bus timings available"}), 500
+    except Exception as e:
+        # return json.dumps({"error": "other exception {0}".format(repr(e))}), 500
+        raise
 
     return json.dumps({"next_bus": res[0], "rt": res[1]})
 

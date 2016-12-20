@@ -10,6 +10,7 @@ from datetime import datetime
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 from pprint import pprint
+from collections import Counter
 
 # API authorisation details (see LTA DataMall website)
 with open("data/hdrs.json", "r") as f:
@@ -158,6 +159,11 @@ def stop_distance(ServiceNo, RouteIndex, Stop1, Stop2):
 def interpolate_rt(route):
     '''Interpolate missing route timings using distance between stops.'''
     pass
+    
+def find_duplicate_stop(stop_codes, stop_id):
+    '''Check if stop_id occurs more than once in stop_codes.'''
+    cnt = Counter(stop_codes)
+    return cnt[stop_id] > 1
 
 def find_next_bus(service, route_index, stop_id, debug_source=None):
     '''Find the location of the next bus approaching stop_id. debug_source, if provided, is an rt dict containing timings to use instead of querying LTADM.'''
@@ -175,6 +181,9 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
     except ValueError:
         raise ValueError("Stop not in route: service={0} route_index={1} stop_id={2}".format(service, route_index, stop_id))
 
+    # check for duplicate stop_id
+    is_duplicate = find_duplicate_stop(stop_codes, stop_id)
+    
     # truncate working data
     route = route[stop_first_index:]
     stop_codes = stop_codes[stop_first_index:]
@@ -218,7 +227,8 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
         # badly named variables!
         "stop_distance": stop_distance(service, route_index, stop_id, found),
         "method_used": method_used,
-        "desc": rt[-1]["desc"]
+        "desc": rt[-1]["desc"],
+        "duplicate": is_duplicate
     }, rt
          
 

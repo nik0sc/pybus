@@ -40,13 +40,27 @@ html, body
 .modal-footer-left
 {
 	/* http://stackoverflow.com/questions/24409495/bootstrap-modal-left-and-right-aligned-content-in-modal-footer */
-	float:left;
-	line-height:34px;
+	float: left;
+	line-height: 34px;
 	color: #AAAAAA;
 	font-style: italic;
 }
-.modal-footer-left > a {
+.modal-footer-left > a
+{
   	color: #70A7D7;
+}
+.fl-right
+{
+	float: right;
+}
+.alert-float
+{
+	/* stick to top of window */
+	position: fixed;
+	top: 0px;
+	z-index: 20;
+	/* don't show at first */
+	display: none;
 }
 @media (min-width: 1158px)
 {
