@@ -5,6 +5,7 @@ import sys, json, pprint
 from datetime import datetime
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
+from collections import Counter
 from pybus import *
 
 def get_all_ltadm_busroutes():
@@ -12,6 +13,10 @@ def get_all_ltadm_busroutes():
 
 def get_all_ltadm_busstops():
 	return get_all_ltadm_obj("http://datamall2.mytransport.sg/ltaodataservice/BusStops")
+
+def sort_busstops(s):
+	'''Not really sorting...'''
+	return {stop['BusStopCode']: stop for stop in s}
 
 def sort_busroutes(s):
 	'''Sort the bus routes by bus and route, and convert distances to integer values in metres.'''
@@ -61,6 +66,62 @@ def bad_stops(all_stops):
 	# combine (| meaning 'or'/union)
 	return list(set(desc_rule) | set(coords_rule))
 	
+def duplicate_stops(all_routes, ignore_bad_stops=True, ignore_terminals=False):
+	'''Find duplicate stops in each route and report them'''
+	result = []
+	for service_k, service in all_routes.items():
+		for route_k, route in service.items():
+			stop_codes = [stop['BusStopCode'] for stop in route]
+			if ignore_bad_stops:
+				stop_codes = [x for x in stop_codes if x not in data_bad_stops]
+			cnt = Counter(stop_codes)
+			dups = {k: v for k,v in cnt.items() if v > 1}
+			if ignore_terminals:
+				# is self assignment for comprehensions okay???
+				dups = {k: v for k,v in dups.items() if k not in [stop_codes[0], stop_codes[-1]]}
+			
+			# ignore empty duplicate dicts
+			if len(dups) == 0:
+				continue
+			
+			result.append({
+				"dups": dups,
+				"service": service_k,
+				"route": route_k
+			})
+
+	return result
+	
+def update_everything():
+	'''Update everything.'''
+	# download new data from LTADM
+	print("Updating everything. This could take a while.")
+	print("Getting routes...")
+	routes_raw = get_all_ltadm_busroutes()
+	print("Getting stops...")
+	stops_raw = get_all_ltadm_busstops()
+	
+	print("Processing...")
+	# munge it:
+	stops = sort_busstops(stops_raw['data'])
+	
+	routes = sort_busroutes(routes_raw['data'])
+	print("check_busroutes: " + check_busroutes(routes))
+	
+	bads = bad_stops(stops)
+	duplicates = duplicate_stops(routes)
+	
+	with open("data_new/busstops.json", "w") as f:
+		json.dump(stops, f, indent=2)
+	
+	with open("data_new/busroutes.json", "w") as f:
+		json.dump(routes, f, indent=2)
+	
+	with open("data_new/bad_stops.json", "w") as f:
+		json.dump(bads, f, indent=2)
+		
+	with open("data_new/duplicate_stops.json", "w") as f:
+		json.dump(duplicates, f, indent=2)
 
 def rt2dbgsrc(rt):
     '''Convert result of get_busroute_timing into something suitable for the debug_source arg of find_next_bus.'''

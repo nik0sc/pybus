@@ -101,3 +101,5 @@ commithash
 # temp files by editor
 *~
 .*.swp
+
+data_old/
