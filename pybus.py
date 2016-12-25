@@ -170,7 +170,7 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
 # TODO implement hook for debug_source
     # directly corresponds to /find_bus/<service>/...
     # first, get the route...
-    route = data_routes.get(str(service), {}).get(str(route_index), {})
+    route = data_routes.get(str(service), {}).get(str(route_index), {}).copy()
     # search backwards from the given stop
     route.reverse()
 
