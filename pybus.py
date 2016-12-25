@@ -225,7 +225,7 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
         "stop": found,
         # "stop_index": rt[-2][,
         # badly named variables!
-        "stop_distance": stop_distance(service, route_index, stop_id, found),
+        "stop_distance": stop_distance(service, route_index, found, stop_id),
         "method_used": method_used,
         "desc": rt[-1]["desc"],
         "duplicate": is_duplicate
