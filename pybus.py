@@ -3,7 +3,6 @@
 
 import sys
 import json
-# import lxml.html
 import re
 import os
 from datetime import datetime
@@ -195,10 +194,12 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
     rt = []
     found = None
     method_used = None
+    is_in_terminal = False
     threshold = 60
     source = debug_source if debug_source is not None else get_busroute_timing_iter(service, stop_codes)
     for stop_timing in source:
         data_stop = next(stop_gen)
+
         stop_timing.update(
             desc=data_stop["Description"],
             lat=data_stop["Latitude"],
@@ -207,18 +208,27 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
         rt.append(stop_timing)
         if not stop_timing["timings"] or not stop_timing["timings"][0]:
             raise RuntimeError("No timings available")
-        if stop_timing["timings"][0] < threshold:
-            found = rt[-1]["stop"]
-            method_used = "threshold"
-            break
         
         cur_index = rt.index(stop_timing)
         if cur_index == 0:
             continue
+        elif cur_index == len(stop_codes) - 1:
+            found = rt[-1]["stop"]
+            method_used = "end"
+            is_in_terminal = True
+            break
+        elif stop_timing["timings"][0] < threshold:
+            found = rt[-1]["stop"]
+            method_used = "threshold"
+            break
         elif rt[cur_index]["timings"][0] > rt[cur_index - 1]["timings"][0]:
             found = rt[-2]["stop"]
             method_used = "jump"
             break
+       
+    if found is None:
+        print("found is None: weird error") 
+        print("method_used={0} stop_codes={1} cur_index={2}".format(method_used, stop_codes, cur_index)) 
         
     # TODO: then if the converted time is less than threshold OR it suddenly jumps backward, note it as the location of the next bus
     return {
@@ -228,7 +238,8 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
         "stop_distance": stop_distance(service, route_index, found, stop_id),
         "method_used": method_used,
         "desc": rt[-1]["desc"],
-        "duplicate": is_duplicate
+        "duplicate": is_duplicate,
+        "in_terminal": is_in_terminal
     }, rt
          
 
