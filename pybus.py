@@ -21,6 +21,7 @@ if hdrs['AccountKey'] == None:
     raise ValueError('Couldn\'t find $PYBUS_ACCOUNTKEY. Did you export it?')
 
 # read in cached routes and stops
+# don't modify these globals. NOTE x = dict.get(); x.reverse() will modify the source dict!!
 with open("data/busroutes.json", "r") as f:
     data_routes = json.load(f)
 
@@ -150,11 +151,11 @@ def get_rt_cached(service, route_index):
     rt.update(service=str(service), route_index=str(route_index))
     return rt
 
-def stop_distance(ServiceNo, RouteIndex, Stop1, Stop2):
-    '''Find the distance in stops between two stops on the same route. Returns a positive int if Stop2 > Stop1.'''
-    route = data_routes.get(str(ServiceNo), {}).get(str(RouteIndex), {})
+def stop_distance(service, route_index, stop1, stop2):
+    '''Find the distance in stops between two stops on the same route. Returns a positive int if stop2 is after stop1 in the specified route.'''
+    route = data_routes.get(str(service), {}).get(str(route_index), {})
     stops = [stop["BusStopCode"] for stop in route]
-    return stops.index(str(Stop2)) - stops.index(str(Stop1))
+    return stops.index(str(stop2)) - stops.index(str(stop1))
 
 def interpolate_rt(route):
     '''Interpolate missing route timings using distance between stops.'''
@@ -166,8 +167,8 @@ def find_duplicate_stop(stop_codes, stop_id):
     return cnt[stop_id] > 1
 
 def find_next_bus(service, route_index, stop_id, debug_source=None):
-    '''Find the location of the next bus approaching stop_id. debug_source, if provided, is an rt dict containing timings to use instead of querying LTADM.'''
-# TODO implement hook for debug_source
+    '''Find the location of the next bus approaching stop_id.'''
+    # TODO implement hook for debug_source
     # directly corresponds to /find_bus/<service>/...
     # first, get the route...
     route = data_routes.get(str(service), {}).get(str(route_index), {}).copy()
