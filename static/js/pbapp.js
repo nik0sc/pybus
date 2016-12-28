@@ -96,8 +96,8 @@ function draw_route(rt)
 			map: map,
 			icon: {
 				url: "/img/bus.90.png",
-				scaledSize: new google.maps.Size(48, 50),
-				anchor: new google.maps.Point(24, 25)
+				scaledSize: new google.maps.Size(24, 25),
+				anchor: new google.maps.Point(12, 12)
 			}
 		}));
 	}
@@ -105,7 +105,8 @@ function draw_route(rt)
 	else
 	{
 	}
-	
+    
+    // TODO: fit bounds or minimum size?	
 	map.fitBounds(bounds);
 	return;
 }
@@ -172,10 +173,20 @@ $(function(){
             {
             	var text = "Your bus is " + data.next_bus.stop_distance + " stops away, and it's about to arrive in the next minute. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
         	}
+            else if (next_mins < 0)
+            {
+            	var text = "Your bus is " + data.next_bus.stop_distance + " stops away, and it's " + (-next_mins) + " minutes overdue. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
+            }
         	else
         	{
         		var text = "Your bus is " + data.next_bus.stop_distance + " stops away, or " + next_mins + " minutes away. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
         	}
+
+            if (data.next_bus.in_terminal)
+            {
+                text += " This bus is still in the terminal."
+            }
+
             $("#find_result").empty().append(text);
             draw_route(data.rt);
         })

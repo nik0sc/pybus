@@ -4,6 +4,7 @@
 import pybus
 import json
 import os
+from traceback import print_exc
 from natsort import natsorted
 from flask import Flask, render_template
 app = Flask(__name__)
@@ -26,12 +27,14 @@ def find_bus_extra(service, route_index, stop_id):
     try:
         res = pybus.find_next_bus(service, route_index, stop_id)
     except ValueError as e:
+        print_exc()
         return json.dumps({"error": "stop not in route"}), 500
     except RuntimeError as e:
+        print_exc()
         return json.dumps({"error": "no bus timings available"}), 500
     except Exception as e:
-        # return json.dumps({"error": "other exception {0}".format(repr(e))}), 500
-        raise
+        print_exc()
+        return json.dumps({"error": "other exception {0}".format(repr(e))}), 500
 
     return json.dumps({"next_bus": res[0], "rt": res[1]})
 
