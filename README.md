@@ -48,11 +48,7 @@ All the stops along a bus route, in order.
 
 ### `/find_bus/<service>/<route_index>/<stop_id>`
 
-Location of the nearest bus on the way to `<stop_id>`.
-
-### `/find_bus_extra/<service>/<route_index>/<stop_id>`
-
-Like `/find_bus/...` but also returns all the stops (codes, descriptions and coordinates) between the bus and `<stop_id>`.
+Location of the nearest bus on the way to `<stop_id>`, plus all the stops (codes, descriptions and coordinates) between the bus and `<stop_id>`.
 
 ## Notes
 

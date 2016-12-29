@@ -5,6 +5,7 @@ import sys
 import json
 import re
 import os
+import error
 from datetime import datetime
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
@@ -141,7 +142,6 @@ def get_busroute_timing(bus, stops, descs):
 
 def get_rt_cached(service, route_index):
     '''Get bus arrival timings (in seconds from request time) using the cached routes'''
-    # TODO: verify that this still works as normal
     route = data_routes.get(str(service), {}).get(str(route_index), {})
     stops = [stop["BusStopCode"] for stop in route]
     descs = [data_stops[str(stop)]["Description"] for stop in stops]
@@ -167,6 +167,8 @@ def find_duplicate_stop(stop_codes, stop_id):
 
 def find_next_bus(service, route_index, stop_id, debug_source=None):
     '''Find the location of the next bus approaching stop_id.'''
+    args = locals()
+
     # TODO implement hook for debug_source
     # directly corresponds to /find_bus/<service>/...
     # first, get the route...
@@ -179,7 +181,7 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
     try:
         stop_first_index = stop_codes.index(stop_id)
     except ValueError:
-        raise ValueError("Stop not in route: service={0} route_index={1} stop_id={2}".format(service, route_index, stop_id))
+        raise error.StopNotInRouteError(args)
 
     # check for duplicate stop_id
     is_duplicate = find_duplicate_stop(stop_codes, stop_id)
@@ -208,7 +210,7 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
         )
         rt.append(stop_timing)
         if not stop_timing["timings"] or not stop_timing["timings"][0]:
-            raise RuntimeError("No timings available")
+            raise error.NoTimingsError(args)
         
         cur_index = rt.index(stop_timing)
         if cur_index == 0:
@@ -228,20 +230,23 @@ def find_next_bus(service, route_index, stop_id, debug_source=None):
             break
        
     if found is None:
-        print("found is None: weird error") 
-        print("method_used={0} stop_codes={1} cur_index={2}".format(method_used, stop_codes, cur_index)) 
+        raise ValueError("found is None: weird error", {
+            "method_used": method_used,
+            "stop_codes": stop_codes,
+            "cur_index": cur_index
+        }) 
         
-    # TODO: then if the converted time is less than threshold OR it suddenly jumps backward, note it as the location of the next bus
     return {
-        "stop": found,
-        # "stop_index": rt[-2][,
-        # badly named variables!
-        "stop_distance": stop_distance(service, route_index, found, stop_id),
-        "method_used": method_used,
-        "desc": rt[-1]["desc"],
-        "duplicate": is_duplicate,
-        "in_terminal": is_in_terminal
-    }, rt
+        "next_bus": {
+            "stop": found,
+            "stop_distance": stop_distance(service, route_index, found, stop_id),
+            "method_used": method_used,
+            "desc": rt[-1]["desc"],
+            "duplicate": is_duplicate,
+            "in_terminal": is_in_terminal
+        },
+        "rt": rt
+    }
          
 
 def route_ends(service, route_index):

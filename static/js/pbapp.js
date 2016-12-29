@@ -41,13 +41,14 @@ function remove_polyline()
 	}
 }
 
-function draw_route(rt)
+function draw_route(rt, in_terminal)
 {
 	// Draw route line (really point-to-point) on the map. Should write a better version
 	// remove existing line
     remove_polyline();
 	remove_markers();
 	
+	// Draw polyline and icons at vertices
 	var bounds = new google.maps.LatLngBounds();
 	var line_coords = [];
 	$.each(rt, function(k,v){
@@ -70,7 +71,8 @@ function draw_route(rt)
 				map: map,
 				icon: {
 					url: "/img/stop.90.png",
-					scaledSize: new google.maps.Size(15, 15)
+					scaledSize: new google.maps.Size(16, 16),
+					anchor: new google.maps.Point(8, 8)
 				}
 			}));
 		}
@@ -83,9 +85,24 @@ function draw_route(rt)
 	drawn_polyline.setMap(map);
 	
 
-	
-	// TODO: draw a bus icon between the last and second-last coords
-	if (line_coords.length >= 2){
+	if (in_terminal)
+	{
+		// Draw bus icon above the terminal
+		drawn_markers.push(new google.maps.Marker({
+			position: {
+				lat: line_coords[line_coords.length - 1].lat,
+				lng: line_coords[line_coords.length - 1].lng
+			},
+			map: map,
+			icon: {
+				url: "/img/bus.90.png",
+				scaledSize: new google.maps.Size(40, 40),
+				anchor: new google.maps.Point(20, 20+30)
+			}
+		}));
+	}
+	// Draw bus icon if there is a real line
+	else if (line_coords.length >= 2){
 		// ugly af
 		var midpoint = {
 			lat: (line_coords[line_coords.length - 1].lat + line_coords[line_coords.length - 2].lat) / 2,
@@ -96,13 +113,13 @@ function draw_route(rt)
 			map: map,
 			icon: {
 				url: "/img/bus.90.png",
-				scaledSize: new google.maps.Size(24, 25),
-				anchor: new google.maps.Point(12, 12)
+				scaledSize: new google.maps.Size(40, 40),
+				anchor: new google.maps.Point(20, 20)
 			}
 		}));
 	}
-	// TODO: or else draw a bus icon approaching the only coords
 	else
+	// Only draw one bus icon
 	{
 	}
     
@@ -156,12 +173,11 @@ $(function(){
     	$("#find_result").empty().append("Finding...");
     	$("#alert_duplicate").slideUp();
     	
-        var url = "/find_bus_extra/" + $("#combo_service").combobox("selectedItem").text  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
+        var url = "/find_bus/" + $("#combo_service").combobox("selectedItem").text  + "/" + $("#list_route").val() + "/" + $("#list_stop").val();
         console.log("Making request to "+ url);
         
         // make the request
         $.getJSON(url, function(data){
-        	var next_mins =  Math.floor(data.rt[0].timings[0] / 60); 
             // attach it to the page
             if (data.next_bus.duplicate)
             {
@@ -169,6 +185,7 @@ $(function(){
             	$("#alert_duplicate").slideDown();
             }
             
+        	var next_mins =  Math.floor(data.rt[0].timings[0] / 60); 
             if (next_mins == 0)
             {
             	var text = "Your bus is " + data.next_bus.stop_distance + " stops away, and it's about to arrive in the next minute. It's now at " + data.next_bus.stop + " " + data.next_bus.desc + ".";
@@ -188,10 +205,14 @@ $(function(){
             }
 
             $("#find_result").empty().append(text);
-            draw_route(data.rt);
+            draw_route(data.rt, data.next_bus.in_terminal);
         })
         .fail(function(data){
             $("#find_result").empty().append("Can't find bus (" + data.responseJSON.error + ")");
+            if (typeof data.responseJSON.repr != "undefined")
+            {
+            	console.log("/find_bus failed with repr: " + data.responseJSON.repr);
+        	}
         })
         .always(function(){
         	// once the XHR is finished, allow more presses
@@ -238,7 +259,12 @@ $(function(){
 	 ** - The event is not fired when the underlying text input is programmatically changed
 	 */
 	$("#combo_text_service").val("Pick one...");
-	
+	// http://stackoverflow.com/questions/209029/best-way-to-remove-an-event-handler-in-jquery
+	$("#combo_text_service").on("click.empty", function(){
+		$(this).val("");
+		// run once only, remove this event handler
+		//.off("click.empty");
+	});
 	
 	//.;
 
