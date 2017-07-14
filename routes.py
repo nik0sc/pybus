@@ -106,7 +106,7 @@ def update_everything():
 	stops = sort_busstops(stops_raw['data'])
 	
 	routes = sort_busroutes(routes_raw['data'])
-	print("check_busroutes: " + check_busroutes(routes))
+	print("check_busroutes: {}".format(check_busroutes(routes)))
 	
 	bads = bad_stops(stops)
 	duplicates = duplicate_stops(routes)
