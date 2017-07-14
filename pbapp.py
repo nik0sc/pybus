@@ -13,8 +13,10 @@ app = Flask(__name__)
 #with open("commithash", "r") as f:
 #    commit_hash = f.read()
 
-commit_hash = os.getenv("HEROKU_SLUG_DESCRIPTION")
+commit_hash = os.getenv("GIT_REV")
 heroku_release_version = os.getenv("HEROKU_RELEASE_VERSION")
+if heroku_release_version == "":
+    heroku_release_version = "No release version"
 
 @app.route("/find_bus/<service>/<route_index>/<stop_id>")
 def find_bus(service, route_index, stop_id):
